@@ -3,6 +3,8 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .manager import CustomUserManager
 
+from apps.file_upload.models import FileUpload
+
 
 class CustomUser(AbstractUser):
 
@@ -14,6 +16,7 @@ class CustomUser(AbstractUser):
     impression = models.IntegerField(default=0)
     viewed_profile = models.IntegerField(default=0)
     friends = models.ManyToManyField('self',blank=True)
+    profile = models.ForeignKey(FileUpload ,on_delete=models.CASCADE,blank=True,null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
