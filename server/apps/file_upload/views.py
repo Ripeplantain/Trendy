@@ -1,3 +1,30 @@
 from django.shortcuts import render
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.views import APIView
 
-# Create your views here.
+from .models import FileUpload as file_upload_model
+from .serializers import FileUploadSerializer as file_upload_serializer
+
+import os
+
+
+class FileUpload(APIView):
+    
+    def post(self, request):
+
+        serializer = file_upload_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    
+    def delete(self, request, pk):
+
+        file_upload = file_upload_model.objects.get(pk=pk)
+        if os.path.exists(file_upload.file.path):
+            os.remove(file_upload.file.path)
+        file_upload.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
