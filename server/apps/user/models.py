@@ -1,27 +1,41 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from .manager import CustomUserManager
+from rest_framework_simplejwt.tokens import RefreshToken
+
 
 from apps.file_upload.models import FileUpload
+from apps.utils.models.base import BaseMixin
 
+import uuid
 
-class CustomUser(AbstractUser):
+class CustomUser(AbstractUser, BaseMixin):
 
-    username = None
-    email = models.EmailField(_('email address'), unique=True)
-    location = models.CharField(max_length=50)
-    phone_number = models.CharField(max_length=50)
-    occupation = models.CharField(max_length=50)
-    impression = models.IntegerField(default=0)
-    viewed_profile = models.IntegerField(default=0)
-    friends = models.ManyToManyField('self',blank=True)
-    profile = models.ForeignKey(FileUpload ,on_delete=models.CASCADE,blank=True,null=True)
+    email = models.EmailField(unique=True)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    friends = models.ManyToManyField('self', blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    phone_number = models.CharField(max_length=255, null=True, blank=True)
+    occupation = models.CharField(max_length=255, null=True, blank=True)
+    # profile_picture = models.ForeignKey(FileUpload, on_delete=models.CASCADE, null=True, blank=True)
+
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 
-    objects = CustomUserManager()
+    class Meta:
+        verbose_name = 'User'
+        verbose_name_plural = 'Users'
 
     def __str__(self):
         return self.email
+    
+    def generate_username(self):
+        username = f"user_{uuid.uuid4().hex[:8]}"
+        return username
+    
+    def save(self, *args, **kwargs):
+        if not self.username:
+            self.username = self.generate_username()
+        super().save(*args, **kwargs)
