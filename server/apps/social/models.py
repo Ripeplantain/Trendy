@@ -22,8 +22,8 @@ class Comment(BaseMixin):
 
 class Post(BaseMixin):
 
-    user = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE)
-    description = models.CharField(max_length=100)
+    user = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
+    content = models.TextField(null=True, blank=True)
     file = models.ForeignKey('file_upload.FileUpload', on_delete=models.CASCADE, blank=True, null=True)
     likes = models.ManyToManyField('user.CustomUser', blank=True, related_name='likes')
 
@@ -32,6 +32,5 @@ class Post(BaseMixin):
         db_table = 'post'
         verbose_name = _('post')
         verbose_name_plural = _('posts')
+        ordering = ['-created_at']
 
-    def __str__(self):
-        return self.content
