@@ -4,8 +4,6 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
 
-import functools
-
 
 from .serializers import CommentSerializer, PostSerializer
 from .models import Comment, Post
