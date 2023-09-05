@@ -11,7 +11,7 @@ from .serializers import CommentSerializer, PostSerializer
 from .models import Comment, Post
 from apps.file_upload.models import FileUpload as File
 from apps.utils.enums.file import FileUploadPurpose as file_enum
-from apps.utils.permissions import IsPostOwner
+from apps.utils.permissions import IsPostOwner, IsCommentOwner
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -82,3 +82,40 @@ class PostViewSet(viewsets.ModelViewSet):
         return Response({
             'detail': 'Post unliked successfully'
         },status=status.HTTP_200_OK)
+    
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+
+    def get_permissions(self):
+        if self.action in ['create_comment','post_comments','retrieve']:
+            permission_classes = [IsAuthenticated]
+        elif self.action in ['update','destroy']:
+            permission_classes = [IsCommentOwner]
+        else:
+            permission_classes = []
+        return [permission() for permission in permission_classes]
+
+
+    @action(detail=True, methods=['post'])
+    def create_comment(self, request, pk=None):
+
+        post = get_object_or_404(Post, pk=pk)
+        serializer = CommentSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        comment = serializer.save(user=request.user, post=post)
+        return Response(CommentSerializer(comment).data, status=status.HTTP_201_CREATED)
+    
+    @action(detail=True, methods=['get'])
+    def post_comments(self, request, pk=None):
+        post = get_object_or_404(Post, pk=pk)
+        comments = Comment.objects.filter(post=post)
+        count = comments.count()
+        serializer = CommentSerializer(comments, many=True)
+        return Response({
+            'count': count,
+            'comments': serializer.data
+        }, status=status.HTTP_200_OK)

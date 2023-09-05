@@ -6,18 +6,16 @@ from apps.utils.models.base import BaseMixin
 
 class Comment(BaseMixin):
 
-    user = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE)
-    post = models.ForeignKey('social.Post', on_delete=models.CASCADE)
-    content = models.CharField(max_length=100)
+    user = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
+    post = models.ForeignKey('social.Post', on_delete=models.CASCADE, null=True, blank=True)
+    comment = models.CharField(max_length=100)
 
 
     class Meta:
         db_table = 'comment'
         verbose_name = _('comment')
         verbose_name_plural = _('comments')
-
-    def __str__(self):
-        return self.content
+        ordering = ['-created_at']
 
 
 class Post(BaseMixin):
