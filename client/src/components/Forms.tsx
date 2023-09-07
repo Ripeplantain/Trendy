@@ -15,7 +15,7 @@ const Forms = () => {
     const onSubmit = handleSubmit((data) => console.log(data));
 
   return (
-        <div className={`flex flex-col w-screen items-center gap-8 ${showLogin ? 'mt-[8rem]' : 'my-[3rem]'}`}>
+        <div className={`dark:bg-gray-950 flex flex-col w-screen h-screen items-center gap-8 ${showLogin ? 'pt-[12rem]' : 'py-[3rem]'}`}>
             <div className='absolute top-1 left-0'>
                 {Object.entries(errors).map(([key, value]) => {
                     return (
@@ -32,7 +32,7 @@ const Forms = () => {
         </div>
         <div>
             {showLogin ? (
-                    <h2 className="text-center text-2xl text-gray-700 tracking-widest uppercase">
+                    <h2 className="text-center text-2xl text-gray-700 dark:text-white tracking-widest uppercase">
                     Start sharing mermories</h2>
             ) : (
                 <h2 className="text-center text-2xl text-gray-700 dark:text-white tracking-widest uppercase">
@@ -59,7 +59,7 @@ const Forms = () => {
             </div>
             <div
                 onClick={() => setShowLogin(!showLogin)}
-                className="mt-5 text-lg tracking-wider flex justify-center items-center gap-4 cursor-pointer">
+                className="dark:text-white mt-5 text-lg tracking-wider flex justify-center items-center gap-4 cursor-pointer">
                 {showLogin ? (
                     <p>
                         Already have an <span className="text-blue-600">account?</span>

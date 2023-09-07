@@ -5,7 +5,7 @@ import {
 } from '../utils/constants'
 
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setMode, selectDarkMode } from '../state/features/userSlice'
 
@@ -15,17 +15,9 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const darkMode = useSelector(selectDarkMode)
 
-
-    useEffect(() => {
-        if (darkMode) {
-            document.body.classList.add('dark')
-        } else {
-            document.body.classList.remove('dark')
-        }
-    },[darkMode])
   return (
     <>
-        <header className="bg-white dark:bg-black">
+        <header className="bg-white dark:bg-gray-950">
             <nav className='flex justify-between items-center w-[100%] px-8 md:px-[3vw] py-3'>
                 <div className='flex gap-[2vw]'>
                     <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-700'>Trendy</h1>
@@ -70,9 +62,9 @@ const Navbar = () => {
                         </li>
                         <li>
                             <button className='
-                                        bg-[#F2F2F2] dark:bg-[#1F1F1F] font-medium
+                                        bg-orange-600 font-medium
                                         rounded-lg px-4 py-2 text-sm tracking-wider uppercase
-                                         text-[#333333] dark:text-[#FFFFFF]
+                                         text-white dark:text-[#FFFFFF]
                                          hover:bg-black hover:text-white
                                          dark:hover:bg-[#F2F2F2] dark:hover:text-black'>
                                 Sign Out

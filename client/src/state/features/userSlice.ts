@@ -7,7 +7,7 @@ import { InitialState } from '../../utils/types/stateTypes'
 const initialState: InitialState = {
     user: null,
     auth: null,
-    darkMode: false,
+    darkMode: JSON.parse(localStorage.getItem('darkMode') || 'false'),
 }
 
 export const userSlice = createSlice({
@@ -31,6 +31,7 @@ export const userSlice = createSlice({
         },
         setMode: (state) => {
             state.darkMode = !state.darkMode
+            localStorage.setItem('darkMode', JSON.stringify(state.darkMode))
         }
     }
 })
