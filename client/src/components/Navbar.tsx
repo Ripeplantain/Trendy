@@ -38,7 +38,7 @@ const Navbar = () => {
                     onClick={() => setShowMenu(!showMenu)}
                     className='md:hidden'>
                     {!showMenu ? (
-                        !darkMode ? (
+                        darkMode ? (
                             <img src={LightNav} alt="light nav" width={40} />
                         ) : (
                             <img src={DarkNav} alt="dark nav" width={40} />
