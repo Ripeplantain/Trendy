@@ -71,11 +71,11 @@ const Navbar = () => {
                         <li>
                             <button className='
                                         bg-[#F2F2F2] dark:bg-[#1F1F1F] font-medium
-                                        rounded-lg px-4 py-2 text-sm tracking-wider
+                                        rounded-lg px-4 py-2 text-sm tracking-wider uppercase
                                          text-[#333333] dark:text-[#FFFFFF]
                                          hover:bg-black hover:text-white
                                          dark:hover:bg-[#F2F2F2] dark:hover:text-black'>
-                                Emmanuel Gyang
+                                Sign Out
                             </button>
                         </li>
                     </ul>
