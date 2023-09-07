@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-// import type { RootState } from '../store'
-
+import { RootState } from '../store'
 
 import { InitialState } from '../../utils/types/stateTypes'
 
 const initialState: InitialState = {
     user: null,
-    auth: null
+    auth: null,
+    darkMode: false,
 }
 
 export const userSlice = createSlice({
@@ -28,11 +28,15 @@ export const userSlice = createSlice({
             } else {
                 console.error("User doesnt have friends")
             }
+        },
+        setMode: (state) => {
+            state.darkMode = !state.darkMode
         }
     }
 })
 
-export const { setLogin, setLogout, setFriends } = userSlice.actions
-// export const selectUser = (state: RootState) => state.user
+export const { setLogin, setLogout, setFriends, setMode } = userSlice.actions
+export const selectUser = (state: RootState) => state.user
+export const selectDarkMode = (state: RootState) => state.user.darkMode
 
 export default userSlice.reducer

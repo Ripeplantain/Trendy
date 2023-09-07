@@ -17,6 +17,7 @@ interface AuthState {
 interface InitialState {
     user: UserState | null
     auth: AuthState | null
+    darkMode: boolean
 }
 
 interface PostState {
@@ -26,8 +27,7 @@ interface PostState {
     likes: number
 }
 
-
-export {
+export type {
     UserState,
     AuthState,
     InitialState,
