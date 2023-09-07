@@ -20,7 +20,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
 
   return (
-    <>
+    <div className="m-8 md:m-0">
         <div {...getRootProps()} className="mb-8 border border-dashed bg-gray-300 border-gray-900 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
           <label htmlFor="profile-picture" className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono">
             Profile Picture
@@ -36,18 +36,18 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
         </div>
         <div 
             className="grid grid-cols-2 gap-5">
-            <div>
+            <div className="col-span-2 md:col-span-1">
                 <label htmlFor="firstName" 
                         className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono">First Name</label>
                 <input type="text"
-                        className="p-3 border-2 border-gray-400 dark:border-gray-600"
+                        className="w-full p-3 border-2 border-gray-400 dark:border-gray-600"
                         id='firstName' {...register("firstName", { required: true })} />
             </div>
-            <div>
+            <div className="col-span-2 md:col-span-1">
                 <label htmlFor="lastName"
                         className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono">Last Name</label>
                 <input type="text"
-                        className="p-3 border-2 border-gray-400 dark:border-gray-600"
+                        className="w-full p-3 border-2 border-gray-400 dark:border-gray-600"
                         id='lastName' {...register("lastName", { required: true })} />
                         </div>
             <div className="col-span-2">
@@ -93,7 +93,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
                         id="confirmPassword" {...register("confirmPassword", { required: true})}/>
             </div>
         </div>
-    </>
+    </div>
   )
 }
 
