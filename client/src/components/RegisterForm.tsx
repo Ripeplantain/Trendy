@@ -12,6 +12,7 @@ type RegisterFormProps = {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
+
     const onDrop = useCallback(acceptedFiles => {
         console.log(acceptedFiles)
     }, [])
@@ -20,7 +21,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
   return (
     <>
-        <div {...getRootProps()} className="mb-8 border border-dashed border-gray-400 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
+        <div {...getRootProps()} className="mb-8 border border-dashed bg-gray-300 border-gray-900 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
           <label htmlFor="profile-picture" className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono">
             Profile Picture
           </label>

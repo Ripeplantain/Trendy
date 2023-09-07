@@ -49,9 +49,9 @@ const Forms = () => {
 
             <div className="flex justify-center items-center gap-4">
                 <button type="submit"
-                        className="bg-[#F2F2F2] dark:bg-[#1F1F1F] font-medium
-                                    rounded-lg mt-6 px-6 py-3 text-sm tracking-wider uppercase
-                                    text-[#333333] dark:text-[#FFFFFF]
+                        className="bg-orange-600 dark:bg-[#1F1F1F] font-medium
+                                    rounded-lg mt-6 px-6 py-3 text-lg tracking-widest uppercase
+                                    text-white dark:text-[#FFFFFF]
                                     hover:bg-black hover:text-white
                                     dark:hover:bg-[#F2F2F2] dark:hover:text-black">
                     {showLogin ? 'Login' : 'Register'}
