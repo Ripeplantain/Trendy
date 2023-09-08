@@ -4,7 +4,7 @@ const HomePage = () => {
   return (
     <div className='bg-gray-100 dark:bg-gray-950 h-screen font-[Rubik]'>
       <Navbar />
-      <div className='flex justify-between px-[10rem] pt-9 '>
+      <div className='grid lg:grid-cols-3 pt-9 gap-[3vw] px-8 md:px-[5rem]'>
         <Profile />
         <Feed />
         <Info />

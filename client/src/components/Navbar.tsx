@@ -17,10 +17,10 @@ const Navbar = () => {
 
   return (
     <>
-        <header className="bg-white dark:bg-black">
+        <header className="bg-white dark:bg-gray-900">
             <nav className='flex justify-between items-center w-[100%] px-8 md:px-[3vw] py-3'>
                 <div className='flex gap-[2vw]'>
-                    <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-700'>Trendy</h1>
+                    <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-600'>Trendy</h1>
                     <input type="search" placeholder='Search...' 
                             className='bg-gray-100 dark:bg-[#333333]
                                             rounded-2xl hidden md:block ps-11' />
@@ -65,7 +65,7 @@ const Navbar = () => {
                                         bg-orange-600 font-medium
                                         rounded-lg px-4 py-2 text-sm tracking-wider uppercase
                                          text-white dark:text-[#FFFFFF]
-                                         hover:bg-black hover:text-white
+                                         hover:bg-black hover:text-white delay-100
                                          dark:hover:bg-[#F2F2F2] dark:hover:text-black'>
                                 Sign Out
                             </button>
@@ -100,14 +100,14 @@ const Navbar = () => {
                                      <FaqIcon className="dark:text-white hover:text-4xl" />
                                  </li>
                                  <li>
-                                     <button className='
-                                                 bg-[#F2F2F2] dark:bg-[#1F1F1F] font-medium
-                                                 rounded-lg px-4 py-2 text-sm tracking-wider
-                                                  text-[#333333] dark:text-[#FFFFFF]
-                                                  hover:bg-black hover:text-white
-                                                  dark:hover:bg-[#F2F2F2] dark:hover:text-black'>
-                                         Emmanuel Gyang
-                                     </button>
+                                    <button className='
+                                        bg-orange-600 font-medium
+                                        rounded-lg px-4 py-2 text-sm tracking-wider uppercase
+                                         text-white dark:text-[#FFFFFF]
+                                         hover:bg-black hover:text-white
+                                         dark:hover:bg-[#F2F2F2] dark:hover:text-black'>
+                                                Sign Out
+                                    </button>
                                  </li>
                             </ul>
                     </div>

@@ -1,7 +1,7 @@
 
 const Feed = () => {
   return (
-    <div>
+    <div className="md:order-3 lg:order-2">
       feed
     </div>
   )

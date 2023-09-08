@@ -14,6 +14,7 @@ import { MdWork as WorkIcon } from 'react-icons/md'
 import { BsLinkedin as LinkedInIcon} from 'react-icons/bs'
 import { FaSquareXTwitter as TwitterIcon } from 'react-icons/fa6'
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi'
+import { MdPersonAddAlt1 as AddIcon } from 'react-icons/md'
 
 export {
     Logo,
@@ -31,5 +32,6 @@ export {
     WorkIcon,
     TwitterIcon,
     LinkedInIcon,
-    EditIcon
+    EditIcon,
+    AddIcon
 }

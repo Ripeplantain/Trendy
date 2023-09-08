@@ -52,7 +52,7 @@ const Forms = () => {
                         className="bg-orange-600 dark:bg-[#1F1F1F] font-medium
                                     rounded-lg mt-6 px-6 py-3 text-lg tracking-widest uppercase
                                     text-white dark:text-[#FFFFFF]
-                                    hover:bg-black hover:text-white
+                                    hover:bg-black hover:text-white delay-100
                                     dark:hover:bg-[#F2F2F2] dark:hover:text-black">
                     {showLogin ? 'Login' : 'Register'}
                 </button>

@@ -6,15 +6,17 @@ import {
 
 const Profile = () => {
   return (
-    <section className="bg-white dark:bg-black p-5 rounded-2xl dark:text-white">
+    <section className="bg-white dark:bg-gray-900 px-10 py-8 h-fit rounded-2xl dark:text-white">
         <div>
-            <div className="flex gap-4 justify-center items-center">
-                <img src={DefaultImage} alt="default image" width={60} className="rounded-full" />
-                <div className="leading-4">
-                    <h1 className="text-base font-semibold">John Doe</h1>
-                    <span className="text-sm">0 friends</span>
+            <div className="flex gap-4 justify-between items-center">
+                <div className="flex items-center gap-7">
+                    <img src={DefaultImage} alt="default image" width={60} className="rounded-full" />
+                    <div className="leading-4">
+                        <h1 className="text-base font-semibold">John Doe</h1>
+                        <span className="text-sm">0 friends</span>
+                    </div>
                 </div>
-                <div className="ms-[7rem]">
+                <div className="">
                     <SettingsIcon className="text-lg" />
                 </div>
             </div>
@@ -43,7 +45,7 @@ const Profile = () => {
         </div>
         <hr className="mt-5" />
         <div>
-            <div className="flex justify-between ms-4 my-3 font-semibold">
+            <div className="flex justify-between ms-4 my-5 font-semibold">
                     <span>Social Profiles</span>
             </div>
             <div className="flex justify-between items-center">
