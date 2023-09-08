@@ -19,6 +19,7 @@ import { BsFillFileEarmarkImageFill as UploadImageIcon } from 'react-icons/bs'
 import { MdVideoCameraBack as VideoIcon } from 'react-icons/md'
 import { RiAttachmentFill as DocumentIcon } from 'react-icons/ri'
 import { AiFillAudio as AudioIcon } from 'react-icons/ai'
+import { AiFillLike as LikeIcon } from 'react-icons/ai'
 
 
 export {
@@ -42,5 +43,6 @@ export {
     UploadImageIcon,
     VideoIcon,
     DocumentIcon,
-    AudioIcon
+    AudioIcon,
+    LikeIcon
 }
