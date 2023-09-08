@@ -5,6 +5,9 @@ import RegisterForm from './RegisterForm'
 import Profile from "./Profile";
 import Feed from "./Feed";
 import Info from "./Info";
+import NewPost from "./NewPost";
+import Posts from "./Posts";
+
 
 export {
     Navbar,
@@ -13,5 +16,7 @@ export {
     RegisterForm,
     Profile,
     Feed,
-    Info
+    Info,
+    NewPost,
+    Posts
 }

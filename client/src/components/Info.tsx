@@ -20,7 +20,7 @@ const Info = () => {
   })
 
   return (
-    <div className='md:order-3'>
+    <div>
       <section className="bg-white dark:bg-gray-900 px-8 py-5 h-fit rounded-2xl dark:text-white">
         <div className='flex justify-between'>
           <h3>Sponsored</h3>
@@ -32,7 +32,7 @@ const Info = () => {
                 className='w-full h-[300px] object-cover rounded-xl'
                 src={data[currentIndex].image} alt="slider image" />
           </div>
-          <div className='flex justify-between items-center'>
+          <div className='md:flex justify-between items-center'>
             <h3 className='font-medium mt-3'>{data[currentIndex].name}</h3>
             <p className='text-sm text-gray-500 mt-2 underline'>{data[currentIndex].url}</p>
           </div>

@@ -15,6 +15,11 @@ import { BsLinkedin as LinkedInIcon} from 'react-icons/bs'
 import { FaSquareXTwitter as TwitterIcon } from 'react-icons/fa6'
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi'
 import { MdPersonAddAlt1 as AddIcon } from 'react-icons/md'
+import { BsFillFileEarmarkImageFill as UploadImageIcon } from 'react-icons/bs'
+import { MdVideoCameraBack as VideoIcon } from 'react-icons/md'
+import { RiAttachmentFill as DocumentIcon } from 'react-icons/ri'
+import { AiFillAudio as AudioIcon } from 'react-icons/ai'
+
 
 export {
     Logo,
@@ -33,5 +38,9 @@ export {
     TwitterIcon,
     LinkedInIcon,
     EditIcon,
-    AddIcon
+    AddIcon,
+    UploadImageIcon,
+    VideoIcon,
+    DocumentIcon,
+    AudioIcon
 }

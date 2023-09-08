@@ -16,8 +16,7 @@ const Navbar = () => {
     const darkMode = useSelector(selectDarkMode)
 
   return (
-    <>
-        <header className="bg-white dark:bg-gray-900">
+        <header className="fixed top-0 w-full bg-white dark:bg-gray-900">
             <nav className='flex justify-between items-center w-[100%] px-8 md:px-[3vw] py-3'>
                 <div className='flex gap-[2vw]'>
                     <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-600'>Trendy</h1>
@@ -75,7 +74,7 @@ const Navbar = () => {
                 {/* drop down menu */}
                 {showMenu && (
                     <div className='md:hidden absolute top-16 left-0 right-0 bg-white
-                                    dark:bg-black py-2 border-b border-gray-200 dark:border-gray-700'>
+                                    dark:bg-gray-900 py-2 border-b border-gray-200 dark:border-gray-700'>
                             <ul className='flex flex-col items-center justify-center text-2xl gap-4'>
                                 <li>
                                     <input type="search" placeholder='Search...' 
@@ -114,7 +113,6 @@ const Navbar = () => {
                 )}
             </nav>
         </header>
-    </>
   )
 }
 

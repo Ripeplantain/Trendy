@@ -1,8 +1,13 @@
+import {
+  NewPost, Posts
+} from '../components'
+
 
 const Feed = () => {
   return (
-    <div className="md:order-3 lg:order-2">
-      feed
+    <div>
+      <NewPost />
+      <Posts />
     </div>
   )
 }
