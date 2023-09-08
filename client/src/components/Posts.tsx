@@ -23,17 +23,17 @@ const Posts = () => {
           <p className="mt-5">{ postData.description }</p>
         </div>
         <div>
-          <img src={postData.image} alt="post image" className="w-full h-[600px] object-center rounded-xl mt-5" />
+          <img src={postData.image} alt="post image" className="w-full md:h-[600px] object-center rounded-xl mt-5" />
         </div>
         <div>
           <div className="flex items-center mt-5 gap-6 ps-7">
-            <div className="flex gap-1 items-center text-xl border-e-2 pe-5 border-black dark:border-white hover:text-orange-600 cursor-pointer">
+            <div className="flex gap-3 items-center text-xl border-e-2 pe-5 border-black dark:border-white hover:text-orange-600 cursor-pointer">
               <LikeIcon />
-              <span>like</span>
+              <span className="text-sm">{postData.likes} likes</span>
             </div>
-            <div className="flex gap-1 items-center text-xl hover:text-orange-600 cursor-pointer">
+            <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
               <MessageIcon />
-              <span>comments</span>
+              <span className="text-sm">{postData.comments} comments</span>
             </div>
           </div>
         </div>

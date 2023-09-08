@@ -16,20 +16,20 @@ const NewPost = () => {
 
         <hr className='mt-8 mb-5'/>
 
-        <div className='flex justify-between items-center'>
-            <div className='flex gap-3 hover:text-orange-600 cursor-pointer'>
+        <div className='md:flex md:flex-row flex-col justify-between items-center'>
+            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
                 <UploadImageIcon className='text-2xl' />
                 <span>Image</span>
             </div>
-            <div className='flex gap-3 hover:text-orange-600 cursor-pointer'>
+            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
                 <VideoIcon className='text-2xl' />
                 <span>Clip</span>
             </div>
-            <div className='flex gap-3 hover:text-orange-600 cursor-pointer'>
+            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
                 <DocumentIcon className='text-2xl' />
                 <span>Attachment</span>
             </div>
-            <div className='flex gap-3 hover:text-orange-600 cursor-pointer'>
+            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
                 <AudioIcon className='text-2xl' />
                 <span>Audio</span>
             </div>
