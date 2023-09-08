@@ -17,7 +17,7 @@ const Navbar = () => {
 
   return (
     <>
-        <header className="bg-white dark:bg-gray-950">
+        <header className="bg-white dark:bg-black">
             <nav className='flex justify-between items-center w-[100%] px-8 md:px-[3vw] py-3'>
                 <div className='flex gap-[2vw]'>
                     <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-700'>Trendy</h1>
