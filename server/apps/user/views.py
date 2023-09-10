@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import CustomUserSerializer as user_serializer
+from apps.file_upload.models import FileUpload as file_model
 
 
 User = get_user_model()
@@ -34,6 +35,14 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
 
         auth_user = User.objects.filter(email=request.data.get('email')).first()
+        file = file_model.objects.filter(id=request.data.get('profile_picture')).first()
+        print(request.data.get('profile_picture'))
+
+        if not file:
+            return Response(
+                {'error': 'Profile picture does not exist'},
+                status=status.HTTP_400_BAD_REQUEST  
+            )
 
         if auth_user:
             return Response(
@@ -42,7 +51,7 @@ class UserViewSet(viewsets.ModelViewSet):
             )
 
         if serializer.is_valid():
-            user = serializer.save()
+            user = serializer.save(profile_picture=file)
             refresh = RefreshToken.for_user(user)
             access_token = refresh.access_token
 

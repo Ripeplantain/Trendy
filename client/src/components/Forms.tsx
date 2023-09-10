@@ -1,18 +1,43 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectImageId, setImageId, setLogin,  } from "../state/features/userSlice";
+import { useNavigate } from "react-router-dom";
 
 import { LoginData, RegisterData } from "../utils/types/FormData";
-
 import { Logo } from "../utils/constants"
 import { LoginForm, RegisterForm } from ".";
+import { registerUser, loginUser } from "../services/auth";
+
+
 
 
 const Forms = () => {
 
     const [ showLogin, setShowLogin ] = useState(true)
+    const imageId = useSelector(selectImageId)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const { register, handleSubmit, formState: { errors } } = useForm<LoginData | RegisterData>();
-    const onSubmit = handleSubmit((data) => console.log(data));
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm<LoginData | RegisterData>();
+
+    const onSubmit = async(data: LoginData | RegisterData) => {
+        try {
+            if (showLogin) {
+                const res = await loginUser(data as LoginData)
+                dispatch(setLogin(res.data))
+                navigate('/home')
+            } else {
+                registerUser(data as RegisterData)
+                dispatch(setImageId(0))
+                setShowLogin(!showLogin)
+                console.log(showLogin)
+            }
+        } catch(error){
+            console.error(error)
+        }
+    }
+
 
   return (
         <div className={`dark:bg-gray-950 flex flex-col w-screen min-h-screen items-center gap-8 ${showLogin ? 'pt-[5rem] md:pt-[12rem]' : 'py-[3rem]'}`}>
@@ -40,15 +65,22 @@ const Forms = () => {
                 </h2>
             )}
         </div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit(onSubmit)}>
 
             {showLogin ? (
                 <LoginForm register={register}/>
             ) : 
-                <RegisterForm register={register}/>}
+                <RegisterForm register={register}/>
+                }
 
             <div className="flex justify-center items-center gap-4">
                 <button type="submit"
+                        onClick={() => {
+                               setValue('profile_picture', imageId, {
+                               shouldValidate: true,
+                               shouldDirty: true
+                        })
+                        }}
                         className="bg-orange-600 dark:bg-[#1F1F1F] font-medium
                                     rounded-lg mt-6 px-6 py-3 text-lg tracking-widest uppercase
                                     text-white dark:text-[#FFFFFF]
@@ -62,11 +94,11 @@ const Forms = () => {
                 className="dark:text-white mt-5 text-lg tracking-wider flex justify-center items-center gap-4 cursor-pointer font-mono">
                 {showLogin ? (
                     <p>
-                        Already have an <span className="text-blue-600">account?</span>
+                        Dont have an <span className="text-blue-600">account?</span>
                     </p>
                 ) : (
                     <p>
-                        Log into your <span className="text-blue-600">account</span>
+                        Already have an <span className="text-blue-600">account?</span>
                     </p>
                 )}
             </div>

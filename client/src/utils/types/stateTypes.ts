@@ -18,6 +18,7 @@ interface InitialState {
     user: UserState | null
     auth: AuthState | null
     darkMode: boolean
+    image_id: number 
 }
 
 interface PostState {

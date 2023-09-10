@@ -56,7 +56,7 @@ const Info = () => {
               </div>
             </div>
             <div className='cursor-pointer'>
-              <AddIcon className='text-3xl text-[#3c6382] delay-100 hover:text-black dark:hover:text-white' />
+              <AddIcon className='text-3xl text-[#3c6382] delay-100 hover:text-orange-600 dark:hover:text-white' />
             </div>
           </div>
         </div>

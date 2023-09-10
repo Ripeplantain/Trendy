@@ -16,7 +16,7 @@ const Profile = () => {
                         <span className="text-sm">0 friends</span>
                     </div>
                 </div>
-                <div className="">
+                <div className="hover:text-orange-600 cursor-pointer">
                     <SettingsIcon className="text-lg" />
                 </div>
             </div>

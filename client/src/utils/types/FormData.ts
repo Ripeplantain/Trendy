@@ -10,12 +10,12 @@ export type RegisterData = {
     email: string;
     password: string;
     confirmPassword: string;
-    firstName: string;
-    lastName: string;
-    phoneNumber: string;
+    first_name: string;
+    last_name: string;
+    phone_number: string;
     location: string;
     occupation: string;
-    profilePicture: string;
+    profile_picture: number;
 }
 
 

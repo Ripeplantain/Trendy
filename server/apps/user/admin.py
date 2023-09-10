@@ -28,6 +28,7 @@ class UserAdmin(auth_admin.UserAdmin):
                     'location',
                     'phone_number',
                     'occupation',
+                    'profile_picture',
                 )
             }
         ),
