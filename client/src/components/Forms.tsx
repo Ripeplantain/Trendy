@@ -4,12 +4,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectImageId, setImageId, setLogin,  } from "../state/features/userSlice";
 import { useNavigate } from "react-router-dom";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+
 import { LoginData, RegisterData } from "../utils/types/FormData";
 import { Logo } from "../utils/constants"
 import { LoginForm, RegisterForm } from ".";
 import { registerUser, loginUser } from "../services/auth";
-
-
+import { registerSchema, loginSchema } from "../utils/validation";
 
 
 const Forms = () => {
@@ -19,7 +20,15 @@ const Forms = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    const { register, setValue, handleSubmit, formState: { errors } } = useForm<LoginData | RegisterData>();
+    let schema;
+
+    if (!showLogin) {
+        schema = registerSchema
+    } else {
+        schema = loginSchema
+    }
+
+    const { register, setValue, handleSubmit, formState: { errors } } = useForm<LoginData | RegisterData>({resolver: yupResolver(schema)});
 
     const onSubmit = async(data: LoginData | RegisterData) => {
         try {
@@ -46,7 +55,7 @@ const Forms = () => {
                     return (
                         <div key={key} className="bg-rose-100 border-l-4 border-rose-500 text-rose-700 p-4 my-2
                         " role="alert">
-                          <p className='text-xs'>{value?.message}</p>
+                          <p className='text-lg tracking-wider'>{value?.message}</p>
                         </div>
                     )
                 }, [])}

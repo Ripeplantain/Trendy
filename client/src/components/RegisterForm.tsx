@@ -6,6 +6,7 @@ import { RegisterData, LoginData } from "../utils/types/FormData"
 
 import { uploadFile } from "../services/uploadFile"
 
+
 import { useDispatch } from "react-redux"
 import { setImageId } from "../state/features/userSlice"
 
@@ -19,8 +20,6 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
     const [ preview, setPreview ] = useState< ReactNode | null>()
     const dispatch = useDispatch()
-
-
 
     const onDrop = useCallback(async (acceptedFiles: File[]) => {
         const data = new FormData()
