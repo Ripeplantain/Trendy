@@ -65,7 +65,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
         <div 
             className="grid grid-cols-2 gap-5">
             <input type="hidden" id="profilePicture"
-                       {...register("profile_picture")} />
+                      {...register("profile_picture")} />
 
             <div className="col-span-2 md:col-span-1">
                 <label htmlFor="firstName" 

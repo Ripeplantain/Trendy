@@ -10,8 +10,8 @@ interface UserState {
 }
 
 interface AuthState {
-    refreshToken: string | null
-    accessToken: string | null
+    refresh: string
+    access: string
 }
 
 interface InitialState {

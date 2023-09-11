@@ -95,3 +95,25 @@ class UserViewSet(viewsets.ModelViewSet):
             'refresh': str(refresh),
             'access': str(access_token),
         }, status=status.HTTP_200_OK)
+
+
+    @action(detail=False, methods=['post'])
+    def logout(self, request):
+        refresh_token = request.data.get('refresh')
+
+        if refresh_token is None:
+            return Response(
+                {'error': 'Please provide a refresh token'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        try:
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+        except:
+            return Response(
+                {'error': 'Invalid refresh token'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        return Response(status=status.HTTP_200_OK)

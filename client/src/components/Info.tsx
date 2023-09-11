@@ -32,7 +32,7 @@ const Info = () => {
                 className='w-full h-[300px] object-cover rounded-xl'
                 src={data[currentIndex].image} alt="slider image" />
           </div>
-          <div className='md:flex justify-between items-center'>
+          <div className='flex flex-col justify-between items-start'>
             <h3 className='font-medium mt-3'>{data[currentIndex].name}</h3>
             <p className='text-sm text-gray-500 mt-2 underline'>{data[currentIndex].url}</p>
           </div>

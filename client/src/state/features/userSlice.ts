@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
-import { InitialState } from '../../utils/types/stateTypes'
+import { InitialState, AuthState } from '../../utils/types/stateTypes'
 
 const initialState: InitialState = {
     user: null,
@@ -15,15 +15,14 @@ export const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setLogin: (state, action: PayloadAction<InitialState>) => {
-            state.user = action.payload.user
-            state.auth = action.payload.auth
-            localStorage.setItem('user', JSON.stringify(state.user))
+        setLogin: (state, action: PayloadAction<AuthState>) => {
+            state.auth = action.payload
             localStorage.setItem('auth', JSON.stringify(state.auth))
         },
         setLogout: (state) => {
             state.user = null
             state.auth = null
+            localStorage.removeItem('auth')
         },
         setFriends: (state, action: PayloadAction<InitialState>) => {
             if (state.user){
