@@ -1,12 +1,15 @@
 interface UserState {
-    firstName: string | null
-    lastName: string | null
+    first_name: string | null
+    last_name: string | null
     email: string | null
     occupation: string | null
-    profilePicture: string | null
+    profile_picture: string | null
     location : string | null
-    phoneNumber: string | null
+    phone_number: string | null
     friends: UserState[] | undefined
+    count_friends: number | null
+    post_counts: number | null
+    impression_counts: number | null
 }
 
 interface AuthState {
@@ -19,6 +22,7 @@ interface InitialState {
     auth: AuthState | null
     darkMode: boolean
     image_id: number 
+    new_friends: UserState[]
 }
 
 interface PostState {
@@ -28,9 +32,12 @@ interface PostState {
     likes: number
 }
 
+
+
 export type {
     UserState,
     AuthState,
     InitialState,
     PostState
 }
+

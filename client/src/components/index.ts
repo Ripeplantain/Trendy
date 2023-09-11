@@ -7,6 +7,7 @@ import Feed from "./Feed";
 import Info from "./Info";
 import NewPost from "./NewPost";
 import Posts from "./Posts";
+import Ad from "./Ad";
 
 
 export {
@@ -18,5 +19,6 @@ export {
     Feed,
     Info,
     NewPost,
-    Posts
+    Posts,
+    Ad
 }

@@ -6,7 +6,7 @@ interface Token {
 }
 
 const baseURL = 'http://localhost:8000/api/v1/'
-const tokenJson = localStorage.getItem('token')
+const tokenJson = localStorage.getItem('auth')
 
 const token: Token = tokenJson ? JSON.parse(tokenJson) : null
 
@@ -52,7 +52,7 @@ privateCall.interceptors.response.use(
             const newAccessToken = await refreshAccessToken(token.refresh)
             if (newAccessToken){
                 token.access = newAccessToken.access
-                localStorage.setItem('token', JSON.stringify(token))
+                localStorage.setItem('auth', JSON.stringify(token))
                 return privateCall(originalRequest)
             }
         }

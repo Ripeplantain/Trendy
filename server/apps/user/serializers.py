@@ -57,4 +57,3 @@ class CustomUserSerializer(serializers.ModelSerializer):
     
     def get_impression_counts(self, obj):
         return obj.user_impressions.count()
-    
