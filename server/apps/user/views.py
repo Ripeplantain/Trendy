@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from rest_framework_simplejwt.tokens import RefreshToken
 
 from .serializers import CustomUserSerializer as user_serializer
+from apps.social.models import Post as post_model
 from apps.file_upload.models import FileUpload as file_model
 
 
