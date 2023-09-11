@@ -21,7 +21,9 @@ const Profile = () => {
         <div>
             <div className="flex gap-4 justify-between items-center">
                 <div className="flex items-center gap-7">
-                    <img src={DefaultImage} alt="default image" width={60} className="rounded-full" />
+                    <img src={user?.profile_picture ? user?.profile_picture.file : DefaultImage} 
+                            alt="default image" 
+                            width={60} height={60} className="rounded-full" />
                     <div className="leading-4">
                         <h1 className="text-base font-semibold">{user?.first_name} {user?.last_name}</h1>
                         <span className="text-sm">{user?.count_friends} friends</span>

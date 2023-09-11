@@ -34,14 +34,12 @@ const Forms = () => {
         try {
             if (showLogin) {
                 const res = await loginUser(data as LoginData)
-                console.log(res.data)
                 dispatch(setLogin(res.data))
                 navigate('/home')
             } else {
                 registerUser(data as RegisterData)
                 dispatch(setImageId(0))
                 setShowLogin(!showLogin)
-                console.log(showLogin)
             }
         } catch(error){
             console.error(error)

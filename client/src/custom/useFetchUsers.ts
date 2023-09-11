@@ -13,7 +13,6 @@ function useFetchUsers(dispatch: Dispatch<Payload>) {
         const fetchFriends = async () => {
             try {
                 const response = await getFriends()
-                console.log(response.data)
                 dispatch(setNewFriends(response.data))
             } catch (error) {
                 console.log(error)

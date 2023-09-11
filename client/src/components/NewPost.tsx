@@ -3,12 +3,20 @@ import {
     DocumentIcon, AudioIcon
 } from '../utils/constants'
 
+import  { useSelector } from 'react-redux'
+import { selectUser } from '../state/features/userSlice'
+
 
 const NewPost = () => {
+
+    const user = useSelector(selectUser)
+
   return (
     <section className="bg-white dark:bg-gray-900 px-10 py-8 h-fit rounded-2xl dark:text-white">
         <div className="flex gap-7">
-          <img src={DefaultImage} alt="default image" className="w-[70px] rounded-full" />
+          <img src={user?.profile_picture ? user?.profile_picture.file : DefaultImage} 
+                alt="default image" 
+                className="w-[70px] rounded-full" />
           <input type="search"
                   className="bg-gray-100 dark:bg-[#333333] rounded-2xl px-5 py-2 w-full"
                   placeholder="What's on your mind" />

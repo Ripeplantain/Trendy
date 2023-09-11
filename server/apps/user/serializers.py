@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 
-# from apps.social.serializers import PostSerializer
 from apps.social.models import Post
+from apps.file_upload.serializers import FileUploadSerializer
 
 User = get_user_model()
 
@@ -16,12 +16,13 @@ class UserPostSerializer(serializers.ModelSerializer):
 
 class CustomUserSerializer(serializers.ModelSerializer):
 
-    friends = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
     count_friends = serializers.SerializerMethodField()
     user_posts = serializers.StringRelatedField(many=True, read_only=True)
     post_counts = serializers.SerializerMethodField()
     user_impressions = serializers.StringRelatedField(many=True, read_only=True)
     impression_counts = serializers.SerializerMethodField()
+    profile_picture = serializers.PrimaryKeyRelatedField(many=False, read_only=True)
+    profile_picture = FileUploadSerializer(many=False, read_only=True)
 
     class Meta:
         model = User
@@ -39,8 +40,12 @@ class CustomUserSerializer(serializers.ModelSerializer):
             'post_counts',
             'user_impressions',
             'impression_counts',
+            'profile_picture'
         )
-        extra_kwargs = { 'password': {'write_only': True}}
+        extra_kwargs = { 
+                        'password': {'write_only': True},
+                        'friends': {'read_only': True},
+                        }
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
