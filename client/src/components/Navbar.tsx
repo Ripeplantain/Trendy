@@ -65,18 +65,18 @@ const Navbar = () => {
                             onClick={() => dispatch(setMode())}
                         >
                             {darkMode ? <LightMode 
-                                            className="dark:text-white hover:text-4xl" /> 
+                                            className="dark:text-white hover:scale-150" /> 
                                         : <DarkMode
-                                            className="dark:text-white hover:text-4xl" />}
+                                            className="dark:text-white hover:scale-150" />}
                         </li>
                         <li>
-                            <MessageIcon className="dark:text-white hover:text-4xl" />
+                            <MessageIcon className="dark:text-white hover:scale-150" />
                         </li>
                         <li>
-                            <NotificationIcon className="dark:text-white hover:text-4xl"  />
+                            <NotificationIcon className="dark:text-white hover:scale-150"  />
                         </li>
                         <li>
-                            <FaqIcon className="dark:text-white hover:text-4xl" />
+                            <FaqIcon className="dark:text-white hover:scale-150" />
                         </li>
                         <li>
                             <button 

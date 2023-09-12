@@ -16,9 +16,6 @@ import { FaSquareXTwitter as TwitterIcon } from 'react-icons/fa6'
 import { BiSolidEditAlt as EditIcon } from 'react-icons/bi'
 import { MdPersonAddAlt1 as AddIcon } from 'react-icons/md'
 import { BsFillFileEarmarkImageFill as UploadImageIcon } from 'react-icons/bs'
-import { MdVideoCameraBack as VideoIcon } from 'react-icons/md'
-import { RiAttachmentFill as DocumentIcon } from 'react-icons/ri'
-import { AiFillAudio as AudioIcon } from 'react-icons/ai'
 import { AiFillLike as LikeIcon } from 'react-icons/ai'
 
 
@@ -41,8 +38,5 @@ export {
     EditIcon,
     AddIcon,
     UploadImageIcon,
-    VideoIcon,
-    DocumentIcon,
-    AudioIcon,
     LikeIcon
 }

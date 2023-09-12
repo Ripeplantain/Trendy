@@ -1,15 +1,35 @@
 import { 
-    DefaultImage, UploadImageIcon, VideoIcon,
-    DocumentIcon, AudioIcon
+    DefaultImage, UploadImageIcon
 } from '../utils/constants'
 
 import  { useSelector } from 'react-redux'
 import { selectUser } from '../state/features/userSlice'
+import { PostModal } from '.'
 
+import useSendPost from '../custom/useSendPost'
+import { useRef, useState } from 'react'
 
 const NewPost = () => {
 
     const user = useSelector(selectUser)
+    const {status , setPost, setStatus} = useSendPost()
+    const postRef = useRef<HTMLInputElement>(null)
+    const [showPostModal, setShowPostModal] = useState(false)
+
+    const handleOnClose = () => setShowPostModal(false)
+
+    const handlePostSubmit  = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+
+        if (status === 201){
+            window.alert('Post created successfully')
+            setStatus(0)
+        }
+
+        const postForm = new FormData()
+        postForm.append('content', postRef.current?.value as string)
+        await setPost(postForm)
+    }
 
   return (
     <section className="bg-white dark:bg-gray-900 px-10 py-8 h-fit rounded-2xl dark:text-white">
@@ -17,36 +37,31 @@ const NewPost = () => {
           <img src={user?.profile_picture ? user?.profile_picture.file : DefaultImage} 
                 alt="default image" 
                 className="w-[70px] rounded-full" />
-          <input type="search"
+          <input type="text"
                   className="bg-gray-100 dark:bg-[#333333] rounded-2xl px-5 py-2 w-full"
-                  placeholder="What's on your mind" />
+                  placeholder="What's on your mind"
+                  ref={postRef}/>
         </div>
 
         <hr className='mt-8 mb-5'/>
 
-        <div className='md:flex md:flex-row flex-col justify-between items-center'>
-            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
+        <div className='md:flex md:flex-row flex-col justify-around items-center'>
+            <div
+                onClick={() => setShowPostModal(true)}
+                className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
                 <UploadImageIcon className='text-2xl' />
-                <span>Image</span>
-            </div>
-            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
-                <VideoIcon className='text-2xl' />
-                <span>Clip</span>
-            </div>
-            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
-                <DocumentIcon className='text-2xl' />
-                <span>Attachment</span>
-            </div>
-            <div className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
-                <AudioIcon className='text-2xl' />
-                <span>Audio</span>
+                <span>Image / Video</span>
             </div>
             <div className='flex gap-3'>
-                <button className='bg-blue-500 text-white rounded-2xl px-5 py-2 tracking-wider hover:bg-orange-600'>
+                <button 
+                        onClick={handlePostSubmit}
+                        className='bg-blue-500 text-white rounded-2xl px-5 py-2 tracking-wider hover:bg-orange-600'>
                     Post
                 </button>
             </div>
         </div>
+
+        <PostModal onClose={handleOnClose} visible={showPostModal} />
   </section>
   )
 }
