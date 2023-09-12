@@ -45,6 +45,7 @@ class PostViewSet(viewsets.ModelViewSet):
             file = File.objects.filter(id=request.data['file']).first()
             if file and file.purpose == file_enum.POST.value:
                 post = serializer.save(user=request.user, file=file)
+                return Response(PostSerializer(post).data, status=status.HTTP_201_CREATED)
             else:
                 return Response({'detail': 'Invalid file'}, status=status.HTTP_400_BAD_REQUEST)
 

@@ -42,6 +42,7 @@ PROJECT_APPS = [
     'apps.user',
     'apps.file_upload',
     'apps.social',
+    'apps.notifications',
 ]
 
 INSTALLED_APPS += PROJECT_APPS
