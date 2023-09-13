@@ -1,6 +1,6 @@
 import { UseFormRegister } from "react-hook-form"
 import { useState, useCallback, ReactNode } from "react"
-import { useDropzone } from "react-dropzone"
+import { FileRejection, useDropzone } from "react-dropzone"
 
 import { RegisterData, LoginData } from "../utils/types/FormData"
 
@@ -20,8 +20,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
     const [ preview, setPreview ] = useState< ReactNode | null>()
     const dispatch = useDispatch()
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-    const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    const onDrop = useCallback(async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
+
+        if (fileRejections.length > 0) {
+          setErrorMessage(fileRejections[0].errors[0].message)
+          return
+        }
+
         const data = new FormData()
         data.append('file', acceptedFiles[0])
         data.append('purpose', 'PROFILE_PICTURE')
@@ -38,7 +45,15 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
     }, [dispatch])
     
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+              onDrop,
+              accept: {
+                image: ['image/png', 'image/jpeg', 'image/jpg']
+              },
+              maxSize: 50 * 1024 * 1024,
+              maxFiles: 1,
+              multiple: false
+          })
 
   return (
     <div className="m-8 md:m-0">
@@ -53,6 +68,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
             <p className="text-gray-500">
               Drag and drop some files here, or click to select files
             </p>
+          )}
+          {errorMessage && (
+                    <p className="text-red-500 text-sm mt-3">{errorMessage}</p>
           )}
         </div>
         {
