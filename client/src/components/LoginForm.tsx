@@ -12,7 +12,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ register }) => {
     <div className="m-8">
         <div 
             className="grid md:grid-cols-2 gap-10">
-            <div className="">
+            <div>
                 <label htmlFor="email" 
                         className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono">Email</label>
                 <input type="email" 

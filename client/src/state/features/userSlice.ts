@@ -4,12 +4,14 @@ import { RootState } from '../store'
 
 import { InitialState, AuthState, UserState } from '../../utils/types/stateTypes'
 
+
 const initialState: InitialState = {
     user: null,
     auth: null,
     darkMode: JSON.parse(localStorage.getItem('darkMode') || 'false'),
     image_id: 0,
-    new_friends: []
+    new_friends: [],
+    notifications: []
 }
 
 export const userSlice = createSlice({
@@ -37,15 +39,19 @@ export const userSlice = createSlice({
         },
         setNewFriends: (state, action: PayloadAction<UserState[]>) => {
             state.new_friends = action.payload
+        },
+        setNotifications: (state, action: PayloadAction<string[]>) => {
+            state.notifications = action.payload
         }
     }
 })
 
-export const { setLogin, setLogout, setMode, setImageId, setUser, setNewFriends } = userSlice.actions
+export const { setLogin, setLogout, setMode, setImageId, setUser, setNewFriends, setNotifications } = userSlice.actions
 export const selectUser = (state: RootState) => state.user.user
 export const selectDarkMode = (state: RootState) => state.user.darkMode
 export const selectImageId = (state: RootState) => state.user.image_id
 export const selectFriends = (state: RootState) => state.user.user?.friends
 export const selectNewFriends = (state: RootState) => state.user.new_friends
+export const selectNotifications = (state: RootState) => state.user.notifications
 
 export default userSlice.reducer

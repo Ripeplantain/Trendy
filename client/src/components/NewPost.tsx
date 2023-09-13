@@ -2,8 +2,8 @@ import {
     DefaultImage, UploadImageIcon
 } from '../utils/constants'
 
-import  { useSelector } from 'react-redux'
-import { selectUser } from '../state/features/userSlice'
+import  { useSelector, useDispatch } from 'react-redux'
+import { selectUser, setNotifications } from '../state/features/userSlice'
 import { PostModal } from '.'
 
 import useSendPost from '../custom/useSendPost'
@@ -15,6 +15,7 @@ const NewPost = () => {
     const {status , setPost, setStatus} = useSendPost()
     const postRef = useRef<HTMLInputElement>(null)
     const [showPostModal, setShowPostModal] = useState(false)
+    const dispatch = useDispatch()
 
     const handleOnClose = () => setShowPostModal(false)
 
@@ -22,7 +23,7 @@ const NewPost = () => {
         e.preventDefault()
 
         if (status === 201){
-            window.alert('Post created successfully')
+            dispatch(setNotifications(['Post created successfully']))
             setStatus(0)
         }
 

@@ -9,7 +9,7 @@ import { AuthState } from '../utils/types/stateTypes'
 
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { setMode, selectDarkMode, setLogout } from '../state/features/userSlice'
+import { setMode, selectDarkMode, setLogout, setNotifications } from '../state/features/userSlice'
 import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
@@ -28,6 +28,7 @@ const Navbar = () => {
             logoutUser(refreshForm)
                 .then(() => {
                     dispatch(setLogout())
+                    dispatch(setNotifications(['Logout successful']))
                     navigate('/')
                 })
                 .catch(err => console.error(err))
@@ -80,7 +81,7 @@ const Navbar = () => {
                         </li>
                         <li>
                             <button 
-                                    onClick={() => handleLogout()   }
+                                    onClick={() => handleLogout()}
                                     className='
                                         bg-orange-600 font-medium
                                         rounded-lg px-4 py-2 text-sm tracking-wider uppercase

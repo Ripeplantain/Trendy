@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectImageId, setImageId, setLogin,  } from "../state/features/userSlice";
 import { useNavigate } from "react-router-dom";
+import { setNotifications } from "../state/features/userSlice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -35,10 +36,12 @@ const Forms = () => {
             if (showLogin) {
                 const res = await loginUser(data as LoginData)
                 dispatch(setLogin(res.data))
+                dispatch(setNotifications(['Login successful']))
                 navigate('/home')
             } else {
                 registerUser(data as RegisterData)
                 dispatch(setImageId(0))
+                dispatch(setNotifications(['Registration successful']))
                 setShowLogin(!showLogin)
             }
         } catch(error){

@@ -57,7 +57,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
   return (
     <div className="m-8 md:m-0">
-        <div {...getRootProps()} className="mb-7 border border-dashed bg-gray-300 border-gray-900 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
+        <div {...getRootProps()} className="opacity-80 mb-7 border border-dashed bg-gray-300 border-gray-900 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
           <label htmlFor="profile-picture" className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono">
             Profile Picture
           </label>

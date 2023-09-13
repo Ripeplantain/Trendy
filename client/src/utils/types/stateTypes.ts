@@ -29,6 +29,7 @@ interface InitialState {
     darkMode: boolean
     image_id: number 
     new_friends: UserState[]
+    notifications: string[]
 }
 
 interface PostState {

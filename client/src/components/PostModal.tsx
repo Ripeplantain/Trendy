@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { selectUser, selectImageId } from "../state/features/userSlice"
 import { FileRejection, useDropzone } from "react-dropzone"
 import { uploadFile } from "../services/uploadFile"
-import { setImageId } from "../state/features/userSlice"
+import { setImageId, setNotifications } from "../state/features/userSlice"
 import useSendPost from '../custom/useSendPost'
 
 
@@ -53,7 +53,7 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                 e.preventDefault()
         
                 if (status === 201){
-                    window.alert('Post created successfully')
+                    dispatch(setNotifications(['Post created successfully']))
                     setStatus(0)
                 }
         
