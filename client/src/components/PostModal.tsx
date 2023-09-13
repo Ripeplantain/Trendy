@@ -55,6 +55,12 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                 if (status === 201){
                     dispatch(setNotifications(['Post created successfully']))
                     setStatus(0)
+                } else if (status === 400) {
+                    dispatch(setNotifications(['Post content is required']))
+                    setStatus(0)
+                } else if (status === 500) {
+                    dispatch(setNotifications(['Something went wrong']))
+                    setStatus(0)
                 }
         
                 const postForm = new FormData()

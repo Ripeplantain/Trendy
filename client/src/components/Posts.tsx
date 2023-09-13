@@ -2,7 +2,6 @@ import postData from "../utils/dummyData"
 import { DefaultImage, AddIcon, LikeIcon, MessageIcon } from "../utils/constants"
 
 
-
 const Posts = () => {
   return (
     <section>

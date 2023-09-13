@@ -6,15 +6,6 @@ from apps.utils.enums.notification import NotificationType
 from apps.utils.enums.impressions import ImpressionType
 
 
-@receiver(post_save, sender=Post)
-def post_created(sender, instance, created, **kwargs):
-    if created:
-        Notification.objects.create(
-            owner=instance.user,
-            content='Post has been uploaded successfully',
-            type=NotificationType.UPDATE.value
-        )
-
 
 @receiver(post_save, sender=Comment)
 def post_commented_on(sender, instance, created, **kargs):
@@ -36,7 +27,7 @@ def post_liked(sender, instance, action, **kwargs):
     if action == 'post_add':
         Notification.objects.create(
             owner=instance.user,
-            content=f'{instance.user.first_name} liked our post',
+            content=f'{instance.user.first_name} liked your post',
             type=NotificationType.IMPRESSION.value
         )
         Impressions.objects.create(
@@ -44,15 +35,15 @@ def post_liked(sender, instance, action, **kwargs):
             post=instance,
             impression=ImpressionType.LIKE.value
         )
-    # elif action == 'post_remove':
-    #     Notification.objects.create(
-    #         owner=instance.user,
-    #         content=f'{instance.user.first_name} unliked our post',
-    #         type=NotificationType.IMPRESSION.value
-    #     )
-    #     Impressions.objects.create(
-    #         user=instance.user,
-    #         post=instance,
-    #         impression=ImpressionType.UNLIKE.value
-    #     )
+    elif action == 'post_remove':
+        Notification.objects.create(
+            owner=instance.user,
+            content=f'{instance.user.first_name} unliked our post',
+            type=NotificationType.IMPRESSION.value
+        )
+        Impressions.objects.create(
+            user=instance.user,
+            post=instance,
+            impression=ImpressionType.UNLIKE.value
+        )
 

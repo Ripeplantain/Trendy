@@ -28,7 +28,19 @@ class PostViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-    
+    def list(self, request):
+        """
+        List all posts
+        """
+        posts = Post.objects.all().exclude(likes=request.user)
+        count = posts.count()
+        serializer = PostSerializer(posts, many=True)
+        return Response({
+            'count': count,
+            'posts': serializer.data
+        }, status=status.HTTP_200_OK)
+
+
     @action(detail=False, methods=['post'])
     def create_post(self, request):
         """
