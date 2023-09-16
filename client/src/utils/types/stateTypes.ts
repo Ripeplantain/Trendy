@@ -36,7 +36,8 @@ interface PostState {
     id: string
     user: UserState
     content: string
-    likes: number
+    likes: UserState[]
+    post_comments: []
 }
 
 

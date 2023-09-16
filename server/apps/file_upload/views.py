@@ -7,6 +7,7 @@ from .models import FileUpload as file_upload_model
 from .serializers import FileUploadSerializer as file_upload_serializer
 
 import os
+from django.utils import timezone
 
 
 class FileUpload(APIView):
@@ -15,6 +16,8 @@ class FileUpload(APIView):
 
         serializer = file_upload_serializer(data=request.data)
         if serializer.is_valid():
+            file_name = f"{request.user.first_name}_{request.user.last_name}_{timezone.now().strftime('%Y%m%d%H%M%S')}"
+            serializer.validated_data['file'].name = file_name
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:

@@ -32,13 +32,9 @@ class PostViewSet(viewsets.ModelViewSet):
         """
         List all posts
         """
-        posts = Post.objects.all().exclude(likes=request.user)
-        count = posts.count()
+        posts = Post.objects.exclude(likes=request.user)
         serializer = PostSerializer(posts, many=True)
-        return Response({
-            'count': count,
-            'posts': serializer.data
-        }, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
     @action(detail=False, methods=['post'])
@@ -61,17 +57,6 @@ class PostViewSet(viewsets.ModelViewSet):
             else:
                 return Response({'detail': 'Invalid file'}, status=status.HTTP_400_BAD_REQUEST)
 
-
-    @action(detail=False, methods=['get'])
-    def user_posts(self, request):
-        posts = Post.objects.filter(user=request.user)
-        count = posts.count()
-        serializer = PostSerializer(posts, many=True)
-        return Response({
-            'count': count,
-            'posts': serializer.data
-        }, status=status.HTTP_200_OK)
-    
     @action(detail=True, methods=['post'])
     def like(self, request, pk=None):
         """

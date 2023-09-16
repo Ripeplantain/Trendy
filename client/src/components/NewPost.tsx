@@ -1,5 +1,5 @@
 import { 
-    DefaultImage, UploadImageIcon
+    DefaultImage, UploadImageIcon, DJANGO_BASE_URL
 } from '../utils/constants'
 
 import  { useSelector, useDispatch } from 'react-redux'
@@ -16,6 +16,7 @@ const NewPost = () => {
     const postRef = useRef<HTMLInputElement>(null)
     const [showPostModal, setShowPostModal] = useState(false)
     const dispatch = useDispatch()
+    const baseUrl = DJANGO_BASE_URL
 
     const handleOnClose = () => setShowPostModal(false)
 
@@ -42,7 +43,7 @@ const NewPost = () => {
   return (
     <section className="bg-white dark:bg-gray-900 px-10 py-8 h-fit rounded-2xl dark:text-white">
         <div className="flex gap-7">
-          <img src={user?.profile_picture ? user?.profile_picture.file : DefaultImage} 
+          <img src={user?.profile_picture ? baseUrl + user?.profile_picture.file : DefaultImage} 
                 alt="default image" 
                 className="w-[70px] rounded-full" />
           <input type="text"

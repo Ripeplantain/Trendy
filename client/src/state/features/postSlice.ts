@@ -11,6 +11,7 @@ export const postSlice = createSlice({
     reducers: {
         setPosts: (state, action: PayloadAction<PostState[]>) => {
             state = action.payload
+            return state
         },
         addPost: (state, action: PayloadAction<PostState>) => {
             const updatedPosts = state.map((post) => {
@@ -23,5 +24,6 @@ export const postSlice = createSlice({
 })
 
 export const { setPosts, addPost } = postSlice.actions
+export const selectPosts = (state: { post: PostState[] }) => state.post
 
 export default postSlice.reducer

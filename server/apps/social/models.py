@@ -3,12 +3,13 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.utils.models.base import BaseMixin
 from apps.utils.enums.impressions import ImpressionType
+from apps.file_upload.models import FileUpload as File
 
 
 class Comment(BaseMixin):
 
     user = models.ForeignKey('user.CustomUser', on_delete=models.CASCADE, null=True, blank=True)
-    post = models.ForeignKey('social.Post', on_delete=models.CASCADE, null=True, blank=True)
+    post = models.ForeignKey('social.Post', related_name='post_comments', on_delete=models.CASCADE, null=True, blank=True)
     comment = models.CharField(max_length=100)
 
 
@@ -23,7 +24,7 @@ class Post(BaseMixin):
 
     user = models.ForeignKey('user.CustomUser', related_name='user_posts' ,on_delete=models.CASCADE, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
-    file = models.ForeignKey('file_upload.FileUpload', on_delete=models.CASCADE, blank=True, null=True)
+    file = models.ForeignKey(File, on_delete=models.CASCADE, blank=True, null=True)
     likes = models.ManyToManyField('user.CustomUser', blank=True, related_name='likes')
 
 

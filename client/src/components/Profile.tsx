@@ -1,7 +1,7 @@
 import { 
         DefaultImage, SettingsIcon, LocationIcon
         , WorkIcon, TwitterIcon, LinkedInIcon,
-        EditIcon
+        EditIcon, DJANGO_BASE_URL
      } from "../utils/constants"
 import useFetchUser from "../custom/useFetchUser"
 
@@ -13,6 +13,7 @@ const Profile = () => {
 
     const dispatch = useDispatch()
     const user = useSelector(selectUser)
+    const baseUrl = DJANGO_BASE_URL
 
     useFetchUser(user, dispatch)
 
@@ -21,7 +22,7 @@ const Profile = () => {
         <div>
             <div className="flex gap-4 justify-between items-center">
                 <div className="flex items-center gap-7">
-                    <img src={user?.profile_picture ? user?.profile_picture.file : DefaultImage} 
+                    <img src={user?.profile_picture ? baseUrl + user?.profile_picture.file : DefaultImage} 
                             alt="default image" 
                             width={60} height={60} className="rounded-full" />
                     <div className="leading-4">
