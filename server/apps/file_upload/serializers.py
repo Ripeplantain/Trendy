@@ -5,7 +5,6 @@ from .models import FileUpload
 
 class FileUploadSerializer(serializers.ModelSerializer):
 
-
     class Meta:
         model = FileUpload
         fields = '__all__'
