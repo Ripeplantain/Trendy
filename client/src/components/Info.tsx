@@ -10,7 +10,6 @@ const Info = () => {
   const dispatch = useDispatch()
   const users = useSelector(selectNewFriends)
 
-  console.log(users)
   useFetchUsers(dispatch)
 
   return (

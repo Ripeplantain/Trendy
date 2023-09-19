@@ -40,9 +40,6 @@ const Navbar = () => {
             <nav className='flex justify-between items-center w-[100%] px-8 md:px-[3vw] py-3'>
                 <div className='flex gap-[2vw]'>
                     <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-600'>Trendy</h1>
-                    <input type="search" placeholder='Search...' 
-                            className='bg-gray-100 dark:bg-[#333333]
-                                            rounded-2xl hidden md:block ps-11' />
                 </div>
                 <div className='md:hidden'>
                 <div 

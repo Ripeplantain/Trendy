@@ -1,5 +1,5 @@
 import { MouseEvent, useRef, useCallback, useState, ReactNode } from "react"
-import { CloseIcon, DefaultImage } from "../utils/constants"
+import { CloseIcon, DefaultImage, DJANGO_BASE_URL } from "../utils/constants"
 
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser, selectImageId } from "../state/features/userSlice"
@@ -24,6 +24,7 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
             const imageId = useSelector(selectImageId)
             const {status , setPost, setStatus} = useSendPost()
             const [errorMessage, setErrorMessage] = useState<string | null>(null)
+            const baseUrl = DJANGO_BASE_URL
 
 
             const onDrop = useCallback(async (acceptedFiles: File[], fileRejections:FileRejection[]) => {
@@ -32,7 +33,6 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                     setErrorMessage(fileRejections[0].errors[0].message)
                     return
                 }
-
 
                 const data = new FormData()
                 data.append('file', acceptedFiles[0])
@@ -100,7 +100,7 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                             <CloseIcon onClick={onClose} />
                         </div>
                         <div className="flex justify-between mt-7 gap-3">
-                            <img src={user?.profile_picture ? user?.profile_picture.file : DefaultImage}
+                            <img src={user?.profile_picture ? baseUrl + user?.profile_picture.file : DefaultImage}
                                 alt="default image" className="w-[70px] rounded-full" />
                             <input type="text" className="bg-gray-100 dark:bg-[#333333] rounded-2xl px-5 py-2 w-full"
                                 placeholder="What's on your mind" ref={postRef} />

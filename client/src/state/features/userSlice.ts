@@ -11,7 +11,7 @@ const initialState: InitialState = {
     darkMode: JSON.parse(localStorage.getItem('darkMode') || 'false'),
     image_id: 0,
     new_friends: [],
-    notifications: []
+    notifications: [],
 }
 
 export const userSlice = createSlice({
@@ -42,11 +42,11 @@ export const userSlice = createSlice({
         },
         setNotifications: (state, action: PayloadAction<string[]>) => {
             state.notifications = action.payload
-        }
+        },
     }
 })
 
-export const { setLogin, setLogout, setMode, setImageId, setUser, setNewFriends, setNotifications } = userSlice.actions
+export const { setLogin, setLogout, setMode, setImageId, setUser, setNewFriends, setNotifications} = userSlice.actions
 export const selectUser = (state: RootState) => state.user.user
 export const selectDarkMode = (state: RootState) => state.user.darkMode
 export const selectImageId = (state: RootState) => state.user.image_id

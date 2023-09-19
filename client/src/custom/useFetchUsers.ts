@@ -1,7 +1,7 @@
 import { Dispatch, useEffect } from "react";
 import { getFriends } from '../services/user'
 import { UserState } from "../utils/types/stateTypes";
-import { setNewFriends } from "../state/features/userSlice";
+import { setNewFriends} from "../state/features/userSlice";
 
 interface Payload {
     type: string
@@ -9,6 +9,7 @@ interface Payload {
 }
 
 function useFetchUsers(dispatch: Dispatch<Payload>) {
+
     useEffect(() => {
         const fetchFriends = async () => {
             try {

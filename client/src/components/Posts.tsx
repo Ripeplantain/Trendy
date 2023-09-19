@@ -3,11 +3,21 @@ import { useSelector } from "react-redux"
 import { selectPosts } from "../state/features/postSlice"
 import useFetchPosts from "../custom/useFetchPosts"
 import { DJANGO_BASE_URL } from "../utils/constants"
+import useLikePost from "../custom/useLikePost"
 
 const Posts = () => {
 
   const posts = useSelector(selectPosts)
   const base_url = DJANGO_BASE_URL
+  const { setLike } = useLikePost()
+
+  const handleLikeButton = async (id: string) => {
+    try {
+      await setLike(id)
+    } catch(error) {
+      console.log(error)
+    }
+  }
 
   useFetchPosts()
 
@@ -28,7 +38,7 @@ const Posts = () => {
                         alt="default image" 
                         className="w-[60px] rounded-full" />
                   <div className="flex flex-col justify-center">
-                    <span className="text-sm">{ post.user.first_name } {}</span>
+                    <span className="text-sm">{ post.user.first_name } {post.user.last_name}</span>
                     <span className="text-xs">{ post.user.location }</span>
                   </div>
               </div>
@@ -40,14 +50,28 @@ const Posts = () => {
               <p className="mt-5">{ post.content }</p>
             </div>
             <div>
-              {/* <img src={post.image} 
-                    alt="post image" 
-                    className="w-full md:h-[600px] object-center rounded-xl mt-5" /> */}
+                {post.file ? post.file.type === 'image' ? (
+                  <img
+                    src={base_url + post.file.file}
+                    alt="post image"
+                    className="w-full md:h-[600px] object-center rounded-xl mt-5"
+                  />
+                ) : (
+                    <video
+                          className="w-full object-center rounded-xl mt-5"
+                          controls>
+                      <source src={base_url + post.file.file} type="video/mp4"/>
+                      Your browser does not support the video tag.
+                    </video>
+                ) : null}
             </div>
             <div>
               <div className="flex items-center mt-5 gap-6 ps-7">
-                <div className="flex gap-3 items-center text-xl border-e-2 pe-5 border-black dark:border-white hover:text-orange-600 cursor-pointer">
-                  <LikeIcon />
+                <div
+                    onClick={() => handleLikeButton(post.id)}
+                    className="flex gap-3 items-center text-xl border-e-2 pe-5 border-black dark:border-white hover:text-orange-600 cursor-pointer">
+                  <LikeIcon
+                  />
                   <span className="text-sm">{post.likes.length} likes</span>
                 </div>
                 <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">

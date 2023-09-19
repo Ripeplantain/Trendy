@@ -17,8 +17,9 @@ class FileUpload(APIView):
         serializer = file_upload_serializer(data=request.data)
         if serializer.is_valid():
             print(serializer.validated_data['file'])
-            file_name = f"{request.data['purpose']}_{timezone.now().strftime('%Y-%m-%d_%H-%M-%S')}"
             file_type = request.data['file'].content_type.split('/')[0]
+            file_extension = request.data['file'].content_type.split('/')[1]
+            file_name = f"{request.data['purpose']}_{timezone.now().strftime('%Y-%m-%d_%H-%M-%S')}.{file_extension}"
             serializer.validated_data['file'].name = file_name
             serializer.validated_data['type'] = file_type
             serializer.save()

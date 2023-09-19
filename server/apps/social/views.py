@@ -32,7 +32,7 @@ class PostViewSet(viewsets.ModelViewSet):
         """
         List all posts
         """
-        posts = Post.objects.exclude(likes=request.user)
+        posts = Post.objects.exclude(likes=request.user)[:20]
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -63,6 +63,10 @@ class PostViewSet(viewsets.ModelViewSet):
         Like a post
         """
         post = self.get_object()
+        if request.user in post.likes.all():
+            return Response({
+                'detail': 'You already liked this post'
+            },status=status.HTTP_400_BAD_REQUEST)
         post.likes.add(request.user)
         return Response({
             'detail': 'Post liked successfully'

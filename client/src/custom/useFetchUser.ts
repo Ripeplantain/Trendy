@@ -10,6 +10,8 @@ interface Payload {
 
 
 function useFetchUser(user: UserState | null, dispatch: Dispatch<Payload>) {
+
+
     useEffect(() => {
         const fetchUser = async ()=> {
             try {

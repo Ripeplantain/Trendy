@@ -16,6 +16,7 @@ interface UserState {
 interface FileState {
     purpose: string
     file: string
+    type: string
 }
 
 interface AuthState {
@@ -37,6 +38,7 @@ interface PostState {
     user: UserState
     content: string
     likes: UserState[]
+    file: FileState | null
     post_comments: []
 }
 
