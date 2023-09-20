@@ -1,14 +1,17 @@
 import axios from 'axios';
 
+
 interface Token {
     access: string | null,
     refresh: string | null,
 }
 
+
 const baseURL = 'http://localhost:8000/api/v1/'
 const tokenJson = localStorage.getItem('auth')
 
-const token: Token = tokenJson ? JSON.parse(tokenJson) : null
+let token: Token = tokenJson && JSON.parse(tokenJson)
+
 
 const apiCall = axios.create({
     baseURL: baseURL,
@@ -27,17 +30,12 @@ const privateCall = axios.create({
     },
 })
 
-privateCall.interceptors.request.use(
-    async (config) => {
-        if (token && token.access) {
-            config.headers.Authorization = `Bearer ${token.access}`
-        }
-        return config
-    },
-    (error) => {
-        return Promise.reject(error)
-    }
-)
+privateCall.interceptors.request.use(async req => {
+    token = JSON.parse(localStorage.getItem('auth') || 'null')
+    req.headers.Authorization = `Bearer ${token.access}`
+    return req
+})
+
 
 
 privateCall.interceptors.response.use(
@@ -51,7 +49,7 @@ privateCall.interceptors.response.use(
 
             const newAccessToken = await refreshAccessToken(token.refresh)
             if (newAccessToken){
-                token.access = newAccessToken.access
+                token = newAccessToken
                 localStorage.setItem('auth', JSON.stringify(token))
                 return privateCall(originalRequest)
             }

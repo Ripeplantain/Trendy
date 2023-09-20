@@ -1,28 +1,8 @@
 import { Navbar, Info, Profile, Feed } from '../components'
-import { ColorRing } from 'react-loader-spinner'
 
 
 
 const HomePage = () => {
-
-  const token = localStorage.getItem('auth')
-  
-  if (!token) return (
-    <div className='bg-gray-100 dark:bg-gray-950 h-[100%] font-[Rubik]'>
-      <Navbar />
-      <div className='flex justify-center items-center h-[100vh]'>
-      <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-        />  
-      </div>
-    </div>
-  )
 
 
   return (

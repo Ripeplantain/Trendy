@@ -75,7 +75,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
         </div>
         {
             preview && (
-              <div className="mb-4 text-gray-00">
+              <div className="mb-4 text-gray-200">
                 <span>{preview}</span>
               </div>
             )

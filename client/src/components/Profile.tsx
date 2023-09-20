@@ -5,17 +5,13 @@ import {
      } from "../utils/constants"
 import useFetchUser from "../custom/useFetchUser"
 
-import { useDispatch, useSelector } from "react-redux"
-import { selectUser } from "../state/features/userSlice"
-
 
 const Profile = () => {
 
-    const dispatch = useDispatch()
-    const user = useSelector(selectUser)
+    const { user } = useFetchUser()
     const baseUrl = DJANGO_BASE_URL
 
-    useFetchUser(user, dispatch)
+
 
   return (
     <section className="bg-white dark:bg-gray-900 px-10 py-8 h-fit rounded-2xl dark:text-white">

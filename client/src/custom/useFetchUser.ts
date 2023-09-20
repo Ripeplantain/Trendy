@@ -1,31 +1,19 @@
-import { Dispatch, useEffect } from "react";
-import { getUser } from "../services/user"
-import { UserState } from "../utils/types/stateTypes";
-import { setUser } from "../state/features/userSlice";
-
-interface Payload {
-    type: string
-    payload: UserState
-}
+import { useEffect } from "react";
+import { fetchUser, selectUser } from "../state/features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../state/store";
 
 
-function useFetchUser(user: UserState | null, dispatch: Dispatch<Payload>) {
 
+function useFetchUser() {
+    const dispatch: AppDispatch = useDispatch()
+    const user = useSelector(selectUser)
 
     useEffect(() => {
-        const fetchUser = async ()=> {
-            try {
-                const response = await getUser()
-                dispatch(setUser(response.data))
-            } catch (error) {
-                console.log(error)
-            }
-        }
+        dispatch(fetchUser())
+    },[dispatch])
 
-        if (!user){
-            fetchUser()
-        }
-    }, [user, dispatch])
+return { user }
 }
 
 export default useFetchUser

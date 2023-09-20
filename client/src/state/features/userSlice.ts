@@ -1,13 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../store'
 
 import { InitialState, AuthState, UserState } from '../../utils/types/stateTypes'
+import { getUser } from '../../services/user'
 
+
+export const fetchUser = createAsyncThunk(
+    'user/fetchUser', () => getUser()
+)
 
 const initialState: InitialState = {
     user: null,
-    auth: null,
+    auth: JSON.parse(localStorage.getItem('auth') || 'null'),
     darkMode: JSON.parse(localStorage.getItem('darkMode') || 'false'),
     image_id: 0,
     new_friends: [],
@@ -17,6 +22,11 @@ const initialState: InitialState = {
 export const userSlice = createSlice({
     name: 'user',
     initialState,
+    extraReducers: {
+        [fetchUser.fulfilled.type]: (state, action: PayloadAction<UserState>) => {
+            state.user = action.payload
+        }
+    },
     reducers: {
         setLogin: (state, action: PayloadAction<AuthState>) => {
             state.auth = action.payload
@@ -26,16 +36,13 @@ export const userSlice = createSlice({
             state.user = null
             state.auth = null
             localStorage.removeItem('auth')
-        },
+        }, 
         setMode: (state) => {
             state.darkMode = !state.darkMode
             localStorage.setItem('darkMode', JSON.stringify(state.darkMode))
         },
         setImageId: (state, action: PayloadAction<number>) => {
             state.image_id = action.payload
-        },
-        setUser: (state, action: PayloadAction<UserState>) => {
-            state.user = action.payload
         },
         setNewFriends: (state, action: PayloadAction<UserState[]>) => {
             state.new_friends = action.payload
@@ -46,12 +53,14 @@ export const userSlice = createSlice({
     }
 })
 
-export const { setLogin, setLogout, setMode, setImageId, setUser, setNewFriends, setNotifications} = userSlice.actions
+export const { setLogin, setLogout, setMode, setImageId, setNewFriends, setNotifications} = userSlice.actions
 export const selectUser = (state: RootState) => state.user.user
 export const selectDarkMode = (state: RootState) => state.user.darkMode
 export const selectImageId = (state: RootState) => state.user.image_id
 export const selectFriends = (state: RootState) => state.user.user?.friends
 export const selectNewFriends = (state: RootState) => state.user.new_friends
 export const selectNotifications = (state: RootState) => state.user.notifications
+
+
 
 export default userSlice.reducer

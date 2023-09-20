@@ -8,7 +8,7 @@ export const registerUser = async (data: RegisterData) => {
 
 
 export const loginUser = async (data: LoginData) => {
-    return await apiCall.post('user/token/', data);
+    return await apiCall.post('user/auth/login/', data);
 }
 
 export const logoutUser = async (data: FormData) => {

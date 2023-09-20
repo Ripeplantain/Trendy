@@ -11,6 +11,7 @@ interface UserState {
     count_friends: number | null
     post_counts: number | null
     impression_counts: number | null
+    exp: number
 }
 
 interface FileState {
@@ -20,8 +21,9 @@ interface FileState {
 }
 
 interface AuthState {
-    refresh: string
-    access: string
+    access: string | null
+    refresh: string | null
+    user: UserState | null
 }
 
 interface InitialState {
