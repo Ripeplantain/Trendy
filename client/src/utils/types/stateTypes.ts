@@ -2,12 +2,12 @@ interface UserState {
     id: number
     first_name: string | null
     last_name: string | null
-    email: string | null
+    email: string 
     occupation: string | null
     profile_picture: FileState | null
     location : string | null
     phone_number: string | null
-    friends: UserState[] | undefined
+    friends: UserState[] 
     count_friends: number | null
     post_counts: number | null
     impression_counts: number | null

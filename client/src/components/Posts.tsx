@@ -1,17 +1,23 @@
-import { DefaultImage, AddIcon, LikeIcon, MessageIcon } from "../utils/constants"
+import { DefaultImage, AddIcon, LikeIcon, MessageIcon, FriendIcon } from "../utils/constants"
 import { useSelector } from "react-redux"
 import { selectPosts } from "../state/features/postSlice"
+import { selectUser } from "../state/features/userSlice"
 import useFetchPosts from "../custom/useFetchPosts"
 import { DJANGO_BASE_URL } from "../utils/constants"
 import useLikePost from "../custom/useLikePost"
 import { PostState } from "../utils/types/stateTypes"
 import { Top } from "../components"
+import useAddFriend from "../custom/useAddFriend"
+import { UserState } from "../utils/types/stateTypes"
 
 const Posts = () => {
 
   const posts = useSelector(selectPosts)
   const base_url = DJANGO_BASE_URL
   const { setLike } = useLikePost()
+  const { setAddFriend } = useAddFriend()
+  const user = useSelector(selectUser)
+  // console.log(user)
 
   const handleLikeButton = async (post: PostState) => {
     try {
@@ -20,6 +26,7 @@ const Posts = () => {
       console.log(error)
     }
   }
+
 
   useFetchPosts()
 
@@ -46,9 +53,21 @@ const Posts = () => {
                     <span className="text-xs">{ post.user.location }</span>
                   </div>
               </div>
-              <div className='cursor-pointer'>
-                    <AddIcon className='text-2xl text-[#3c6382] delay-100 hover:text-orange-600 dark:hover:text-white' />
-              </div>
+              {
+                post.user.friends.some(
+                  (friend: UserState) => friend.email === user?.email
+                ) ? (
+                  <div>
+                    <FriendIcon className='text-2xl text-[#3c6382] delay-100' />
+                  </div>
+                ) : (
+                  <div
+                  onClick={() => setAddFriend(post.user.email)}
+                className='cursor-pointer'>
+                  <AddIcon className='text-2xl text-[#3c6382] delay-100 hover:text-orange-600 dark:hover:text-white' />
+                </div>
+                )
+              }
             </div>
             <div>
               <p className="mt-5">{ post.content }</p>

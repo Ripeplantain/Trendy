@@ -125,3 +125,19 @@ class UserViewSet(viewsets.ModelViewSet):
         queryset = User.objects.exclude(friends__id=request.user.id).exclude(id=request.user.id).order_by('?')[:5]
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+    @action(detail=False, methods=['post'])
+    def add_friend(self, request):
+        email = request.query_params.get('email')
+        user = User.objects.get(email=email)
+        
+        if request.user in user.friends.all():
+            return Response({
+                'detail': 'You are already friends with this user'
+            },status=status.HTTP_400_BAD_REQUEST)
+        
+        user.friends.add(request.user)
+        return Response({
+            'detail': 'Friend added successfully'
+        },status=status.HTTP_200_OK)

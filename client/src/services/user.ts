@@ -10,3 +10,11 @@ export const getUser = async () => {
 export const getFriends = async () => {
     return await privateCall.get('user/auth/new_friends/');
 }
+
+export const addFriend = async (email: string) => {
+    await privateCall.post(`user/auth/add_friend/`, null, {
+        params: {
+            email: email
+        }
+    });
+}

@@ -6,7 +6,7 @@ import DefaultImage from '../assets/logo-white.svg'
 import { BsFillSunFill as LightMode, BsFillMoonFill as DarkMode } from 'react-icons/bs' 
 import { BiSolidMessageAltDetail as MessageIcon } from 'react-icons/bi'
 import { IoMdNotifications as NotificationIcon } from 'react-icons/io'
-import { FaQuestionCircle as FaqIcon } from 'react-icons/fa'
+import { FaQuestionCircle as FaqIcon, FaUserFriends as FriendIcon } from 'react-icons/fa'
 import { AiOutlineCloseSquare as CloseIcon } from 'react-icons/ai'
 import { RiUserSettingsFill as SettingsIcon } from 'react-icons/ri'
 import { IoLocationSharp as LocationIcon } from 'react-icons/io5'
@@ -17,6 +17,7 @@ import { BiSolidEditAlt as EditIcon } from 'react-icons/bi'
 import { MdPersonAddAlt1 as AddIcon } from 'react-icons/md'
 import { BsFillFileEarmarkImageFill as UploadImageIcon } from 'react-icons/bs'
 import { AiFillLike as LikeIcon } from 'react-icons/ai'
+
 
 const DJANGO_BASE_URL = 'http://127.0.0.1:8000'
 
@@ -41,5 +42,6 @@ export {
     AddIcon,
     UploadImageIcon,
     LikeIcon,
-    DJANGO_BASE_URL
+    DJANGO_BASE_URL,
+    FriendIcon
 }
