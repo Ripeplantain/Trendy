@@ -10,6 +10,6 @@ export const getPosts = async () => {
 }
 
 
-export const likePost = async (id: string ) => {
+export const likePost = async (id: number ) => {
     return await privateCall.post(`social/post/${id}/like/`);
 }

@@ -4,6 +4,7 @@ import { selectPosts } from "../state/features/postSlice"
 import useFetchPosts from "../custom/useFetchPosts"
 import { DJANGO_BASE_URL } from "../utils/constants"
 import useLikePost from "../custom/useLikePost"
+import { PostState } from "../utils/types/stateTypes"
 
 const Posts = () => {
 
@@ -11,9 +12,9 @@ const Posts = () => {
   const base_url = DJANGO_BASE_URL
   const { setLike } = useLikePost()
 
-  const handleLikeButton = async (id: string) => {
+  const handleLikeButton = async (post: PostState) => {
     try {
-      await setLike(id)
+      await setLike(post.id)
     } catch(error) {
       console.log(error)
     }
@@ -67,13 +68,25 @@ const Posts = () => {
             </div>
             <div>
               <div className="flex items-center mt-5 gap-6 ps-7">
-                <div
-                    onClick={() => handleLikeButton(post.id)}
+                {
+                  !post.liked ? (
+                    <div
+                    onClick={() => handleLikeButton(post)}
                     className="flex gap-3 items-center text-xl border-e-2 pe-5 border-black dark:border-white hover:text-orange-600 cursor-pointer">
-                  <LikeIcon
-                  />
-                  <span className="text-sm">{post.likes.length} likes</span>
-                </div>
+                    <LikeIcon
+                    />
+                    <span className="text-sm">{post.likes_count} likes</span>
+                    </div>
+                  ) : (
+                    <div
+                    onClick={() => handleLikeButton(post)}
+                    className="flex gap-3 items-center text-xl border-e-2 pe-5 border-black dark:border-white text-orange-600 cursor-pointer">
+                    <LikeIcon
+                    />
+                    <span className="text-sm">{post.likes_count} likes</span>
+                    </div>
+                  )
+                }
                 <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
                   <MessageIcon />
                   <span className="text-sm">{post.post_comments.length} comments</span>

@@ -36,12 +36,14 @@ interface InitialState {
 }
 
 interface PostState {
-    id: string
+    id: number
     user: UserState
     content: string
     likes: UserState[]
+    likes_count: number
     file: FileState | null
     post_comments: []
+    liked: boolean
 }
 
 

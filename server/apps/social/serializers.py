@@ -18,6 +18,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     file = FileUploadSerializer(read_only=True)
     likes = CustomUserSerializer(read_only=True, many=True)
+    likes_count = serializers.SerializerMethodField()
     user = CustomUserSerializer(read_only=True)
     post_comments = serializers.StringRelatedField(many=True, read_only=True)
 
@@ -25,3 +26,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = '__all__'
+
+
+    def get_likes_count(self, obj):
+        return obj.likes.count()
