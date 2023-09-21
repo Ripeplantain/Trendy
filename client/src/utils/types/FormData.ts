@@ -17,5 +17,3 @@ export type RegisterData = {
     occupation: string;
     profile_picture: number;
 }
-
-

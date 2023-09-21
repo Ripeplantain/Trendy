@@ -60,7 +60,7 @@ export const selectImageId = (state: RootState) => state.user.image_id
 export const selectFriends = (state: RootState) => state.user.user?.friends
 export const selectNewFriends = (state: RootState) => state.user.new_friends
 export const selectNotifications = (state: RootState) => state.user.notifications
-
+export const selectAuth = (state: RootState) => state.user.auth
 
 
 export default userSlice.reducer

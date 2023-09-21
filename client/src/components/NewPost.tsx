@@ -36,6 +36,10 @@ const NewPost = () => {
 
 
         const postForm = new FormData()
+        if(postRef.current?.value === '') {
+            dispatch(setNotifications(['Post content is required']))
+            return
+        }
         postForm.append('content', postRef.current?.value as string)
         await setPost(postForm)
     }
