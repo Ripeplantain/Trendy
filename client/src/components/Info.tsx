@@ -15,7 +15,7 @@ const Info = () => {
   return (
     <div>
 
-      <section className="bg-white dark:bg-gray-900 px-8 py-5 h-fit rounded-2xl dark:text-white max-h-[40vh] overflow-y-scroll">
+      <section className="bg-white dark:bg-gray-900 px-8 py-5 h-fit rounded-2xl dark:text-white">
         <span className='font-medium text-lg'>Gain a new follower</span>
         {users.map((user, index) => (
               <div className='mt-5' key={index + 1}>
