@@ -9,6 +9,7 @@ import NewPost from "./NewPost";
 import Posts from "./Posts";
 import Ad from "./Ad";
 import PostModal from "./PostModal";
+import Top from "./Top";
 
 
 export {
@@ -22,5 +23,6 @@ export {
     NewPost,
     Posts,
     Ad,
-    PostModal
+    PostModal,
+    Top
 }

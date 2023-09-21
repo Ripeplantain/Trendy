@@ -10,7 +10,7 @@ import { AuthState } from '../utils/types/stateTypes'
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setMode, selectDarkMode, setLogout, setNotifications } from '../state/features/userSlice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 const Navbar = () => {
 
@@ -39,7 +39,11 @@ const Navbar = () => {
         <header className="fixed top-0 w-full bg-white dark:bg-gray-900">
             <nav className='flex justify-between items-center w-[100%] px-8 md:px-[3vw] py-3'>
                 <div className='flex gap-[2vw]'>
-                    <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-600'>Trendy</h1>
+                    <Link
+                        to={'/home'}
+                    >
+                        <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-600'>Trendy</h1>
+                    </Link>
                 </div>
                 <div className='md:hidden'>
                 <div 

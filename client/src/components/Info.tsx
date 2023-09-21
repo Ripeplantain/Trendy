@@ -2,7 +2,7 @@ import { DefaultImage, AddIcon } from '../utils/constants'
 import useFetchUsers  from '../custom/useFetchUsers'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectNewFriends } from '../state/features/userSlice'
-import Ad from './Ad'
+// import Ad from './Ad'
 
 
 const Info = () => {
@@ -15,7 +15,7 @@ const Info = () => {
   return (
     <div>
 
-      <section className="bg-white dark:bg-gray-900 px-8 py-5 h-fit rounded-2xl dark:text-white">
+      <section className="bg-white dark:bg-gray-900 px-8 py-5 h-fit rounded-2xl dark:text-white max-h-[40vh] overflow-y-scroll">
         <span className='font-medium text-lg'>Gain a new follower</span>
         {users.map((user, index) => (
               <div className='mt-5' key={index + 1}>
@@ -38,7 +38,7 @@ const Info = () => {
               </div>
         ))}
       </section>
-      <Ad />
+      {/* <Ad /> */}
     </div>
 
   )

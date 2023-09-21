@@ -5,6 +5,7 @@ import useFetchPosts from "../custom/useFetchPosts"
 import { DJANGO_BASE_URL } from "../utils/constants"
 import useLikePost from "../custom/useLikePost"
 import { PostState } from "../utils/types/stateTypes"
+import { Top } from "../components"
 
 const Posts = () => {
 
@@ -30,6 +31,8 @@ const Posts = () => {
             <span className="text-[40px] text-gray-400 font-medium mt-10">No posts yet</span>
         </div>
       )}
+
+      <Top />
 
       {posts.map((post, index) => (
             <div key={index + 1} className="bg-white dark:bg-gray-900 mt-10 px-10 py-8 h-fit rounded-2xl dark:text-white">
