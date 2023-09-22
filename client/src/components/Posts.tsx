@@ -1,4 +1,4 @@
-import { DefaultImage, AddIcon, LikeIcon, MessageIcon, FriendIcon } from "../utils/constants"
+import { DefaultImage, AddIcon, LikeIcon, FriendIcon } from "../utils/constants"
 import { useSelector } from "react-redux"
 import { selectPosts } from "../state/features/postSlice"
 import { selectUser } from "../state/features/userSlice"
@@ -17,7 +17,6 @@ const Posts = () => {
   const { setLike } = useLikePost()
   const { setAddFriend } = useAddFriend()
   const user = useSelector(selectUser)
-  // console.log(user)
 
   const handleLikeButton = async (post: PostState) => {
     try {
@@ -94,7 +93,7 @@ const Posts = () => {
                   !post.liked ? (
                     <div
                     onClick={() => handleLikeButton(post)}
-                    className="flex gap-3 items-center text-xl border-e-2 pe-5 border-black dark:border-white hover:text-orange-600 cursor-pointer">
+                    className="flex gap-3 items-center text-x hover:text-orange-600 cursor-pointer">
                     <LikeIcon
                     />
                     <span className="text-sm">{post.likes_count} likes</span>
@@ -102,17 +101,17 @@ const Posts = () => {
                   ) : (
                     <div
                     onClick={() => handleLikeButton(post)}
-                    className="flex gap-3 items-center text-xl border-e-2 pe-5 border-black dark:border-white text-orange-600 cursor-pointer">
+                    className="flex gap-3 items-center text-xl text-orange-600 cursor-pointer">
                     <LikeIcon
                     />
                     <span className="text-sm">{post.likes_count} likes</span>
                     </div>
                   )
                 }
-                <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
+                {/* <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
                   <MessageIcon />
                   <span className="text-sm">{post.post_comments.length} comments</span>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

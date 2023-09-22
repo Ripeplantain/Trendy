@@ -63,11 +63,19 @@ class PostViewSet(viewsets.ModelViewSet):
         Like a post
         """
         post = self.get_object()
+
+        if post.user == request.user:
+            return Response({
+                'detail': 'You cannot like your own post'
+            },status=status.HTTP_400_BAD_REQUEST)
+        
         if request.user in post.likes.all():
             return Response({
                 'detail': 'You already liked this post'
             },status=status.HTTP_400_BAD_REQUEST)
+        
         post.likes.add(request.user)
+        
         return Response({
             'detail': 'Post liked successfully'
         },status=status.HTTP_200_OK)

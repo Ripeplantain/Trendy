@@ -1,14 +1,16 @@
 import { DefaultImage, AddIcon } from '../utils/constants'
 import useFetchUsers  from '../custom/useFetchUsers'
+import useAddFriend from "../custom/useAddFriend"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectNewFriends } from '../state/features/userSlice'
-// import Ad from './Ad'
 
 
 const Info = () => {
 
   const dispatch = useDispatch()
   const users = useSelector(selectNewFriends)
+  const { setAddFriend } = useAddFriend()
+
 
   useFetchUsers(dispatch)
 
@@ -31,14 +33,15 @@ const Info = () => {
                       <p className='text-[14px] text-gray-500 mt-2'>{user.occupation}</p>
                     </div>
                   </div>
-                  <div className='cursor-pointer'>
+                  <div
+                    onClick={() => setAddFriend(user.email)}
+                      className='cursor-pointer'>
                     <AddIcon className='text-3xl text-[#3c6382] delay-100 hover:text-orange-600 dark:hover:text-orange-600' />
                   </div>
                 </div>
               </div>
         ))}
       </section>
-      {/* <Ad /> */}
     </div>
 
   )

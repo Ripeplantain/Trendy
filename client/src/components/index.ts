@@ -10,6 +10,7 @@ import Posts from "./Posts";
 import Ad from "./Ad";
 import PostModal from "./PostModal";
 import Top from "./Top";
+import Notification from "./Notification";
 
 
 export {
@@ -24,5 +25,6 @@ export {
     Posts,
     Ad,
     PostModal,
-    Top
+    Top,
+    Notification
 }

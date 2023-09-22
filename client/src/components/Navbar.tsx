@@ -5,6 +5,7 @@ import {
 } from '../utils/constants'
 import { logoutUser } from '../services/auth'
 import { AuthState } from '../utils/types/stateTypes'
+import { Notification } from '.'
 
 
 import { useState } from 'react'
@@ -15,6 +16,7 @@ import { useNavigate, Link } from 'react-router-dom'
 const Navbar = () => {
 
     const [ showMenu, setShowMenu ] = useState(false)
+    const [ showNotifications, setShowNotifications ] = useState(false)
     const dispatch = useDispatch()
     const darkMode = useSelector(selectDarkMode)
     const navigate = useNavigate()
@@ -74,7 +76,9 @@ const Navbar = () => {
                         <li>
                             <MessageIcon className="dark:text-white hover:scale-150" />
                         </li>
-                        <li>
+                        <li
+                            onClick={() => setShowNotifications(!showNotifications)}
+                        >
                             <NotificationIcon className="dark:text-white hover:scale-150"  />
                         </li>
                         <li>
@@ -137,6 +141,16 @@ const Navbar = () => {
                     </div>
                 )}
             </nav>
+
+
+            {/* notifications */}
+            {showNotifications && (
+                <div>
+                    <Notification />
+                </div>
+            )}
+
+
         </header>
   )
 }
