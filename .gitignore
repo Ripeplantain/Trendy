@@ -44,3 +44,6 @@ server/media/uploads/
 \#*\#
 .DS_Store
 Thumbs.db
+
+.venv/
+server/__pycache__/
