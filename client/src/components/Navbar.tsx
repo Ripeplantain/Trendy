@@ -118,8 +118,10 @@ const Navbar = () => {
                                  <li>
                                      <MessageIcon className="dark:text-white hover:text-4xl" />
                                  </li>
-                                 <li>
-                                     <NotificationIcon className="dark:text-white hover:text-4xl"  />
+                                 <li
+                                    onClick={() => setShowNotifications(!showNotifications)}
+                                 >
+                                     <NotificationIcon className="dark:text-white hover:scale-150"  />
                                  </li>
                                  <li>
                                      <FaqIcon className="dark:text-white hover:text-4xl" />
