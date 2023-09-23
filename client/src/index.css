@@ -4,17 +4,17 @@
 
 
 /* The scrollbar track */
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 15px;
-}
+} */
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
   background: #dd7800;
   border-radius: 10px;
-}
+} */
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+/* ::-webkit-scrollbar-thumb:hover {
   background: #357ABD;
-}
+} */

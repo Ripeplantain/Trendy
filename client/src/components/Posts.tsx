@@ -59,7 +59,8 @@ const Posts = () => {
                   <div>
                     <FriendIcon className='text-2xl text-[#3c6382] delay-100' />
                   </div>
-                ) : (
+                ) 
+                : (
                   <div
                   onClick={() => setAddFriend(post.user.email)}
                 className='cursor-pointer'>

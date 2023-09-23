@@ -42,6 +42,7 @@ const NewPost = () => {
         }
         postForm.append('content', postRef.current?.value as string)
         await setPost(postForm)
+        postRef.current!.value = ''
     }
 
   return (

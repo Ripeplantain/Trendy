@@ -136,6 +136,11 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response({
                 'detail': 'You are already friends with this user'
             },status=status.HTTP_400_BAD_REQUEST)
+
+        if request.user == user:
+            return Response({
+                'detail': 'You cant add yourself as a friend'
+            }, status=status.HTTP_400_BAD_REQUEST)
         
         user.friends.add(request.user)
         return Response({
