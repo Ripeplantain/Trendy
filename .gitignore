@@ -1,7 +1,6 @@
 # Ignore Django-specific files and directories
 *.pyc
 __pycache__
-db.sqlite3
 *.log
 *.pot
 *.egg-info/

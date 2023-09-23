@@ -7,7 +7,7 @@ interface Token {
 }
 
 
-const baseURL = 'http://localhost:8000/api/v1/'
+const baseURL = 'https://trendy-86ek.onrender.com/api/v1/'
 const tokenJson = localStorage.getItem('auth')
 
 let token: Token = tokenJson && JSON.parse(tokenJson)
