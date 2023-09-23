@@ -20,7 +20,7 @@ SECRET_KEY = 'django-insecure-uws$#4cry&l74clkzjc--m+$^cp8rau0n0v7oub%adxwv!ez#!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,7 +66,9 @@ AUTH_USER_MODEL = 'user.CustomUser'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            ''
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
