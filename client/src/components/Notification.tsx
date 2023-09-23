@@ -1,10 +1,13 @@
 import useNotification from "../custom/useNotification"
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import { CloseIcon } from "../utils/constants"
 
 
 const Notification = () => {
 
-  const { notifications } = useNotification()
-  console.log(notifications)
+  dayjs.extend(relativeTime)
+  const { notifications, markNotificationAsRead } = useNotification()
 
   return (
     <div
@@ -15,15 +18,19 @@ const Notification = () => {
         </div>
         <div className="p-4">
             {notifications.map((notification, index) => (
-                <div key={index} className="flex flex-col justify-between items-center p-2 my-2 border border-gray-200 dark:border-gray-700 rounded-lg">
-                    <div className="flex items-center">
+                <div key={index} className="flex flex-col justify-between items-start p-4 my-2 border border-gray-200 dark:border-gray-700 rounded-lg">
+                    <div className="flex items-center gap-[4vw]">
                         <div className="flex flex-col">
-                            <p className="text-md font-medium dark:text-white">{notification.type}</p>
-                            <p className="text-sm text-gray-500 dark:text-gray-400">{notification.content}</p>
+                            <p className="text-md text-gray-500 dark:text-gray-400">{notification.content}</p>
+                        </div>
+                        <div 
+                            onClick={() => markNotificationAsRead(notification.id)}
+                            className="text-xl cursor-pointer">
+                              <CloseIcon className="text-gray-500 dark:text-gray-400 hover:scale-150" />
                         </div>
                     </div>
                     <div className="flex flex-col">
-                        <p className="text-xs text-gray-500 dark:text-gray-400">{notification.updated_at}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{`${dayjs(notification.updated_at).fromNow()}`}</p>
                     </div>
                 </div>
             ))}

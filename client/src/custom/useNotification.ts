@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addNotifications, selectNotification } from '../state/features/notificationSlice';
-import { getNotifications } from '../services/notification';
+import { addNotifications, selectNotification, markRead } from '../state/features/notificationSlice';
+import { getNotifications, markAsRead } from '../services/notification';
 
 
 
@@ -18,7 +18,13 @@ const useNotification = () => {
         fetchNotifications();
     }, [dispatch]);
 
-    return { notifications };
+    const markNotificationAsRead = useCallback(async (id: number) => {
+        await markAsRead(id);
+        dispatch(markRead(id));
+    }, [dispatch]);
+
+
+    return { notifications, markNotificationAsRead };
 }
 
 export default useNotification;

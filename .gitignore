@@ -6,6 +6,9 @@ __pycache__
 *.egg-info/
 /migrations/
 
+# ignore sqlite file
+server/db.sqlite3
+
 # Ignore Node.js and React-specific files and directories
 node_modules/
 build/

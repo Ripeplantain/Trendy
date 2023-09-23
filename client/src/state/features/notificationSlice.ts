@@ -12,11 +12,14 @@ export const notificationSlice = createSlice({
         addNotifications: (state, action: PayloadAction<NotificatonState[]>) => {
             state = action.payload
             return state
-        }
+        },
+        markRead: (state, action: PayloadAction<number>) => {
+            return state.filter(notification => notification.id !== action.payload);
+        },
     }
 })
 
-export const { addNotifications } = notificationSlice.actions
-export const selectNotification = (state: { post: NotificatonState[] }) => state.post
+export const { addNotifications, markRead } = notificationSlice.actions
+export const selectNotification = (state: { notification: NotificatonState[] }) => state.notification
 
 export default notificationSlice.reducer
