@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 
 from .serializers import CommentSerializer, PostSerializer
@@ -32,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
         """
         List all posts
         """
-        posts = Post.objects.exclude(likes=request.user)[:20]
+        posts = Post.objects.filter(created_at=timezone.now().date()).order_by('-created_at')
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

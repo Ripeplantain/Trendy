@@ -36,7 +36,7 @@ const Navbar = () => {
         }
     }
 
-  return (
+    return (
         <header className="fixed top-0 w-full bg-white dark:bg-gray-900">
             <nav className='flex justify-between items-center w-[100%] px-8 md:px-[3vw] py-3'>
                 <div className='flex gap-[2vw]'>
@@ -89,9 +89,9 @@ const Navbar = () => {
                                     className='
                                         bg-orange-600 font-medium
                                         rounded-lg px-4 py-2 text-sm tracking-wider uppercase
-                                         text-white dark:text-[#FFFFFF]
-                                         hover:bg-black hover:text-white delay-100
-                                         dark:hover:bg-[#F2F2F2] dark:hover:text-black'>
+                                        text-white dark:text-[#FFFFFF]
+                                        hover:bg-black hover:text-white delay-100
+                                        dark:hover:bg-[#F2F2F2] dark:hover:text-black'>
                                 Sign Out
                             </button>
                         </li>
