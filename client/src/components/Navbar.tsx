@@ -43,7 +43,7 @@ const Navbar = () => {
                     <Link
                         to={'/home'}
                     >
-                        <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-600'>Trendy</h1>
+                        <h1 className='font-[Lora] tracking-wider text-4xl md:text-3xl font-semibold text-orange-600'>Monty Gram</h1>
                     </Link>
                 </div>
                 <div className='md:hidden'>
