@@ -1,4 +1,4 @@
-import { DefaultImage, AddIcon, LikeIcon, FriendIcon } from "../utils/constants"
+import { DefaultImage, AddIcon, LikeIcon, FriendIcon, MessageIcon } from "../utils/constants"
 import { useSelector } from "react-redux"
 import { selectPosts } from "../state/features/postSlice"
 import { selectUser } from "../state/features/userSlice"
@@ -109,10 +109,10 @@ const Posts = () => {
                     </div>
                   )
                 }
-                {/* <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
+                <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
                   <MessageIcon />
                   <span className="text-sm">{post.post_comments.length} comments</span>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>

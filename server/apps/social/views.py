@@ -33,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
         """
         List all posts
         """
-        posts = Post.objects.filter(created_at=timezone.now().date()).order_by('-created_at')
+        posts = Post.objects.filter(created_at__date=timezone.now().date()).order_by('-created_at')
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
