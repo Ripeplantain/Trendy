@@ -15,7 +15,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
         """
         List all notifications
         """
-        notifications = Notification.objects.filter(user=request.user)
+        notifications = Notification.objects.filter(owner=request.user)
         serializer = NotificationSerializer(notifications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
