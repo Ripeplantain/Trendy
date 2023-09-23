@@ -19,7 +19,7 @@ import { BsFillFileEarmarkImageFill as UploadImageIcon } from 'react-icons/bs'
 import { AiFillLike as LikeIcon } from 'react-icons/ai'
 
 
-const DJANGO_BASE_URL = 'http://127.0.0.1:8000'
+const DJANGO_BASE_URL = 'https://trendy-86ek.onrender.com'
 
 
 export {
