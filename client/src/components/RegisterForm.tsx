@@ -8,6 +8,7 @@ import { uploadFile } from "../services/uploadFile"
 
 
 import { useDispatch } from "react-redux"
+import { TailSpin } from 'react-loader-spinner'
 import { setImageId } from "../state/features/userSlice"
 
 
@@ -21,6 +22,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
     const [ preview, setPreview ] = useState< ReactNode | null>()
     const dispatch = useDispatch()
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const onDrop = useCallback(async (acceptedFiles: File[], fileRejections: FileRejection[]) => {
 
@@ -34,10 +36,13 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
         data.append('purpose', 'PROFILE_PICTURE')
 
         try {
+          setIsLoading(true)
           const res = await uploadFile(data)
           dispatch(setImageId(res.data.id))
         } catch (error) {
           console.error('Image upload error: ', error)
+        } finally {
+          setIsLoading(false)
         }
 
         setPreview(acceptedFiles[0].name)
@@ -57,7 +62,9 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
   return (
     <div className="m-8 md:m-0">
-        <div {...getRootProps()} className="opacity-80 mb-7 border border-dashed bg-gray-300 border-gray-900 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
+        <div {...getRootProps()} 
+            onClick={e => e.stopPropagation()}
+            className="opacity-80 mb-7 border border-dashed bg-gray-300 border-gray-900 dark:border-gray-600 rounded-lg p-6 text-center cursor-pointer">
           <label htmlFor="profile-picture" className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono">
             Profile Picture
           </label>
@@ -73,6 +80,18 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
                     <p className="text-red-500 text-sm mt-3">{errorMessage}</p>
           )}
         </div>
+
+        {isLoading && <TailSpin
+                          height="80"
+                          width="80"
+                          color="#4fa94d"
+                          ariaLabel="tail-spin-loading"
+                          radius="1"
+                          wrapperStyle={{}}
+                          wrapperClass=""
+                          visible={true}
+                      /> }
+
         {
             preview && (
               <div className="mb-4 text-gray-200">

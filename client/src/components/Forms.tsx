@@ -1,13 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectImageId, setImageId, setLogin } from "../state/features/userSlice";
+import { selectImageId, setImageId, setLogin, setNotifications } from "../state/features/userSlice";
 import { useNavigate } from "react-router-dom";
-import { setNotifications } from "../state/features/userSlice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { LoginData, RegisterData } from "../utils/types/FormData";
+import { AuthError } from "../utils/types/errorType";
 import { Logo } from "../utils/constants"
 import { LoginForm, RegisterForm } from ".";
 import { registerUser, loginUser } from "../services/auth";
@@ -32,20 +32,27 @@ const Forms = () => {
     const { register, setValue, handleSubmit, formState: { errors } } = useForm<LoginData | RegisterData>({resolver: yupResolver(schema)});
 
     const onSubmit = async(data: LoginData | RegisterData) => {
-        try {
-            if (showLogin) {
-                const res = await loginUser(data as LoginData)
-                dispatch(setLogin(res.data))
-                dispatch(setNotifications(['Login successful']))
-                navigate('/home')
-            } else {
+        if (showLogin) {
+            try {
+                    const res = await loginUser(data as LoginData)
+                    dispatch(setLogin(res.data))
+                    dispatch(setNotifications(['Login successful']))
+                    navigate('/home')
+            } catch(error) {
+                const err = error as AuthError
+                dispatch(setNotifications([err.response.data.error]))
+                console.log(err.response.data.error)
+            }
+        } else {
+            try {
                 registerUser(data as RegisterData)
                 dispatch(setImageId(0))
                 dispatch(setNotifications(['Registration successful']))
                 setShowLogin(!showLogin)
+            } catch(error) {
+                const err = error as AuthError
+                dispatch(setNotifications([err.response.data.error]))
             }
-        } catch(error){
-            console.error(error)
         }
     }
 

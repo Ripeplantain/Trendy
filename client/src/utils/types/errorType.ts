@@ -12,5 +12,17 @@ interface ServerError {
     status: number
 }
 
+interface AuthError {
+    code: string
+    message: string
+    name: string
+    response: {
+        data: {
+            error: string
+        }
+    }
+    status: number
+}
 
-export type { ServerError }
+
+export type { ServerError, AuthError }

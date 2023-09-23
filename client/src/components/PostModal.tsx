@@ -2,10 +2,10 @@ import { MouseEvent, useRef, useCallback, useState, ReactNode } from "react"
 import { CloseIcon, DefaultImage, DJANGO_BASE_URL } from "../utils/constants"
 
 import { useSelector, useDispatch } from "react-redux"
-import { selectUser, selectImageId } from "../state/features/userSlice"
+import { selectUser, selectImageId, setNotifications, setImageId } from "../state/features/userSlice"
 import { FileRejection, useDropzone } from "react-dropzone"
+import { TailSpin } from 'react-loader-spinner'
 import { uploadFile } from "../services/uploadFile"
-import { setImageId, setNotifications } from "../state/features/userSlice"
 import useSendPost from '../custom/useSendPost'
 
 
@@ -25,6 +25,7 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
             const {status , setPost, setStatus} = useSendPost()
             const [errorMessage, setErrorMessage] = useState<string | null>(null)
             const baseUrl = DJANGO_BASE_URL
+            const [isLoading, setIsLoading] = useState<boolean>(false)
 
 
             const onDrop = useCallback(async (acceptedFiles: File[], fileRejections:FileRejection[]) => {
@@ -39,10 +40,15 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                 data.append('purpose', 'POST')
 
                 try {
-                const res = await uploadFile(data)
-                dispatch(setImageId(res.data.id))
+                    setIsLoading(true)
+                    const res = await uploadFile(data)
+                    dispatch(setImageId(res.data.id))
+                    dispatch(setNotifications(['Image uploaded successfully']))
                 } catch (error) {
-                console.error('Image upload error: ', error)
+                    dispatch(setNotifications(['Image upload error']))
+                    console.error('Image upload error: ', error)
+                } finally {
+                    setIsLoading(false)
                 }
 
                 setPreview(acceptedFiles[0].name)
@@ -106,6 +112,7 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                                 placeholder="What's on your mind" ref={postRef} />
                         </div>
                         <div {...getRootProps()}
+                            onClick={e => e.stopPropagation()}
                             className="my-7 border border-dashed bg-gray-300 bg-opacity-20 border-gray-900 dark:border-gray-600 rounded-lg py-11 px-6 text-center cursor-pointer">
                             <label htmlFor="post-image"
                                 className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono mb-3">
@@ -123,6 +130,18 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                                 <p className="text-red-500 text-sm mt-3">{errorMessage}</p>
                             )}
                         </div>
+                        
+                        {isLoading && <TailSpin
+                                        height="80"
+                                        width="80"
+                                        color="#4fa94d"
+                                        ariaLabel="tail-spin-loading"
+                                        radius="1"
+                                        wrapperStyle={{}}
+                                        wrapperClass=""
+                                        visible={true}
+                                    /> }
+
                         {
                         preview && (
                         <>
