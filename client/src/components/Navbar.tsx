@@ -4,7 +4,6 @@ import {
     LightNav, DarkNav, CloseIcon
 } from '../utils/constants'
 import { logoutUser } from '../services/auth'
-import { AuthState } from '../utils/types/stateTypes'
 import { Notification } from '.'
 
 
@@ -24,7 +23,7 @@ const Navbar = () => {
     const handleLogout = () => {
         const authString: string | null = localStorage.getItem('auth')
         if (authString) {
-            const auth: AuthState = JSON.parse(authString)
+            const auth = JSON.parse(authString)
             const refreshForm = new FormData()
             refreshForm.append('refresh', auth.refresh)
             logoutUser(refreshForm)
