@@ -47,11 +47,21 @@ interface PostState {
 }
 
 
+interface NotificatonState {
+    id: number
+    user: UserState
+    content: string
+    is_read: boolean
+    type: string
+}
+
+
 
 export type {
     UserState,
     AuthState,
     InitialState,
-    PostState
+    PostState,
+    NotificatonState
 }
 
