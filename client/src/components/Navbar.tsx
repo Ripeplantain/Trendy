@@ -7,7 +7,7 @@ import { logoutUser } from '../services/auth'
 import { Notification } from '.'
 
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setMode, selectDarkMode, setLogout, setNotifications } from '../state/features/userSlice'
 import { useNavigate, Link } from 'react-router-dom'
@@ -156,4 +156,5 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+
+export const MemoizedNavbar = React.memo(Navbar)

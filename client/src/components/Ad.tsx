@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import data from '../utils/ads'
 
 
@@ -41,4 +41,5 @@ const Ad = () => {
   )
 }
 
-export default Ad
+ 
+export const MemoizedAd = React.memo(Ad)

@@ -1,6 +1,7 @@
 import {
   NewPost, Posts
 } from '../components'
+import React from 'react'
 
 
 const Feed = () => {
@@ -12,4 +13,4 @@ const Feed = () => {
   )
 }
 
-export default Feed
+export const MemoizedFeed = React.memo(Feed)

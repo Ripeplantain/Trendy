@@ -4,5 +4,5 @@ import LoginPage from './Auth/LoginPage';
 
 export { 
     HomePage,
-    LoginPage
+    LoginPage,
 } 

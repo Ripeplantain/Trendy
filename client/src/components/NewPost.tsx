@@ -7,7 +7,7 @@ import { selectUser, setNotifications } from '../state/features/userSlice'
 import { PostModal } from '.'
 
 import useSendPost from '../custom/useSendPost'
-import { useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 const NewPost = () => {
 
@@ -52,7 +52,7 @@ const NewPost = () => {
                 alt="default image" 
                 className="w-[70px] rounded-full" />
           <input type="text"
-                  className="bg-gray-100 dark:bg-[#333333] rounded-2xl px-5 py-2 w-full"
+                  className="bg-gray-100 dark:bg-[#333333] rounded-2xl p-5 w-full"
                   placeholder="What's on your mind"
                   ref={postRef}/>
         </div>
@@ -80,4 +80,4 @@ const NewPost = () => {
   )
 }
 
-export default NewPost
+export const MemoizedNewPost = React.memo(NewPost)

@@ -44,6 +44,7 @@ interface PostState {
     file: FileState | null
     post_comments: []
     liked: boolean
+    showComments: boolean
 }
 
 

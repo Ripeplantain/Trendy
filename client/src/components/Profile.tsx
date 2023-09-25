@@ -4,6 +4,7 @@ import {
         EditIcon, DJANGO_BASE_URL
      } from "../utils/constants"
 import useFetchUser from "../custom/useFetchUser"
+import React from "react"
 
 
 const Profile = () => {
@@ -83,4 +84,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export const MemoizedProfile = React.memo(Profile)

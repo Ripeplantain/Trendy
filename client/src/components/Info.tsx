@@ -3,6 +3,7 @@ import useFetchUsers  from '../custom/useFetchUsers'
 import useAddFriend from "../custom/useAddFriend"
 import { useDispatch, useSelector } from 'react-redux'
 import { selectNewFriends } from '../state/features/userSlice'
+import React from 'react'
 
 
 const Info = () => {
@@ -47,4 +48,4 @@ const Info = () => {
   )
 }
 
-export default Info
+export const MemoizedInfo = React.memo(Info)

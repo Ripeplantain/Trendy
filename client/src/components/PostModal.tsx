@@ -7,6 +7,7 @@ import { FileRejection, useDropzone } from "react-dropzone"
 import { TailSpin } from 'react-loader-spinner'
 import { uploadFile } from "../services/uploadFile"
 import useSendPost from '../custom/useSendPost'
+import React from "react"
 
 
 interface ModalProp {
@@ -108,7 +109,7 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                         <div className="flex justify-between mt-7 gap-3">
                             <img src={user?.profile_picture ? baseUrl + user?.profile_picture.file : DefaultImage}
                                 alt="default image" className="w-[70px] rounded-full" />
-                            <input type="text" className="bg-gray-100 dark:bg-[#333333] rounded-2xl px-5 py-2 w-full"
+                            <input type="text" className="bg-gray-100 dark:bg-[#333333] rounded-2xl p-5 w-full"
                                 placeholder="What's on your mind" ref={postRef} />
                         </div>
                         <div {...getRootProps()}
@@ -166,4 +167,4 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
             )
             }
 
-            export default PostModal
+            export const MemoizedPostModal = React.memo(PostModal)

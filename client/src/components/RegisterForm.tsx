@@ -1,5 +1,5 @@
 import { UseFormRegister } from "react-hook-form"
-import { useState, useCallback, ReactNode } from "react"
+import React, { useState, useCallback, ReactNode } from "react"
 import { FileRejection, useDropzone } from "react-dropzone"
 
 import { RegisterData, LoginData } from "../utils/types/FormData"
@@ -166,4 +166,4 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
   )
 }
 
-export default RegisterForm
+export const MemoizedRegisterForm = React.memo(RegisterForm)

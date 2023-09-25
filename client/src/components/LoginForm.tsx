@@ -1,5 +1,6 @@
 import { UseFormRegister } from "react-hook-form"
 import { LoginData } from "../utils/types/FormData"
+import React from "react"
 
 
 type LoginFormProps = {
@@ -31,4 +32,5 @@ const LoginForm: React.FC<LoginFormProps> = ({ register }) => {
   )
 }
 
-export default LoginForm
+
+export const MemoizedLoginForm = React.memo(LoginForm)

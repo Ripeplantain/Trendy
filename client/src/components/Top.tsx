@@ -1,4 +1,5 @@
 import useScrollToTop from "../custom/useScrolltoTop"
+import React from "react" 
 
 const Top = () => {
     
@@ -20,4 +21,4 @@ const Top = () => {
   )
 }
 
-export default Top
+export const MemoizedTop = React.memo(Top)

@@ -1,16 +1,16 @@
-import Navbar from "./Navbar";
-import Forms from "./Forms";
-import LoginForm from "./LoginForm";
-import RegisterForm from './RegisterForm'
-import Profile from "./Profile";
-import Feed from "./Feed";
-import Info from "./Info";
-import NewPost from "./NewPost";
-import Posts from "./Posts";
-import Ad from "./Ad";
-import PostModal from "./PostModal";
-import Top from "./Top";
-import Notification from "./Notification";
+import { MemoizedNavbar as Navbar} from "./Navbar";
+import { MemoizedForms as Forms } from "./Forms";
+import { MemoizedLoginForm as LoginForm } from "./LoginForm";
+import { MemoizedRegisterForm as RegisterForm} from './RegisterForm'
+import { MemoizedProfile as Profile } from "./Profile";
+import { MemoizedFeed as Feed } from "./Feed";
+import { MemoizedInfo as Info } from "./Info";
+import { MemoizedNewPost as NewPost} from "./NewPost";
+import { MemoizedPosts as Posts} from "./Posts";
+import {MemoizedAd as Ad} from "./Ad";
+import { MemoizedPostModal as PostModal} from "./PostModal";
+import {MemoizedTop as Top} from "./Top";
+import { MemoizedNotification as Notification} from "./Notification";
 
 
 export {

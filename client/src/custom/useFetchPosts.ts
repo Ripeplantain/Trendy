@@ -1,18 +1,13 @@
-import { Dispatch, useEffect } from "react";
+import { useEffect } from "react";
 import { getPosts } from '../services/post'
-import { PostState } from "../utils/types/stateTypes";
 import { setPosts } from "../state/features/postSlice";
 import { useDispatch } from "react-redux";
-
-interface Payload {
-    type: string
-    payload: PostState[]
-}
 
 
 function useFetchPosts() {
 
-    const dispatch: Dispatch<Payload> = useDispatch()
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
         const fetchPosts = async () => {

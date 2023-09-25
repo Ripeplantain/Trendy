@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectImageId, setImageId, setLogin, setNotifications } from "../state/features/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -125,4 +125,7 @@ const Forms = () => {
   )
 }
 
-export default Forms
+// export default Forms
+
+
+export const MemoizedForms = React.memo(Forms)

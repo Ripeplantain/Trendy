@@ -4,7 +4,7 @@ import LightNav from '../assets/white-nav.png'
 import DefaultImage from '../assets/logo-white.svg'
 
 import { BsFillSunFill as LightMode, BsFillMoonFill as DarkMode } from 'react-icons/bs' 
-import { BiSolidMessageAltDetail as MessageIcon } from 'react-icons/bi'
+import { BiSolidMessageAltDetail as MessageIcon, BiSolidSend as SendIcon } from 'react-icons/bi'
 import { IoMdNotifications as NotificationIcon } from 'react-icons/io'
 import { FaQuestionCircle as FaqIcon, FaUserFriends as FriendIcon } from 'react-icons/fa'
 import { AiOutlineCloseSquare as CloseIcon } from 'react-icons/ai'
@@ -43,5 +43,6 @@ export {
     UploadImageIcon,
     LikeIcon,
     DJANGO_BASE_URL,
-    FriendIcon
+    FriendIcon,
+    SendIcon
 }

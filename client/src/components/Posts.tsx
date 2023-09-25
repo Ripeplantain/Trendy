@@ -1,6 +1,7 @@
-import { DefaultImage, AddIcon, LikeIcon, FriendIcon, MessageIcon } from "../utils/constants"
-import { useSelector } from "react-redux"
-import { selectPosts } from "../state/features/postSlice"
+import { DefaultImage, AddIcon, LikeIcon, FriendIcon, MessageIcon,
+          SendIcon} from "../utils/constants"
+import { useSelector, useDispatch } from "react-redux"
+import { selectPosts, showComment } from "../state/features/postSlice"
 import { selectUser } from "../state/features/userSlice"
 import useFetchPosts from "../custom/useFetchPosts"
 import { DJANGO_BASE_URL } from "../utils/constants"
@@ -9,18 +10,30 @@ import { PostState } from "../utils/types/stateTypes"
 import { Top } from "../components"
 import useAddFriend from "../custom/useAddFriend"
 import { UserState } from "../utils/types/stateTypes"
+import useComment from "../custom/useComment"
+import React, { useRef } from "react"
 
 const Posts = () => {
 
   const posts = useSelector(selectPosts)
+  const dispatch = useDispatch()
   const base_url = DJANGO_BASE_URL
   const { setLike } = useLikePost()
   const { setAddFriend } = useAddFriend()
   const user = useSelector(selectUser)
+  const commentRef = useRef<HTMLInputElement>(null)
 
   const handleLikeButton = async (post: PostState) => {
     try {
       await setLike(post.id)
+    } catch(error) {
+      console.log(error)
+    }
+  }
+
+  const handleCommentButton = async (post: PostState) => {
+    try {
+      await useComment(post.id, commentRef.current?.value)
     } catch(error) {
       console.log(error)
     }
@@ -109,11 +122,30 @@ const Posts = () => {
                     </div>
                   )
                 }
-                <div className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
-                  <MessageIcon />
-                  <span className="text-sm">{post.post_comments.length} comments</span>
+                <div
+                    onClick={() => dispatch(showComment(post.id))}
+                    className="flex gap-3 items-center text-xl hover:text-orange-600 cursor-pointer">
+                    <MessageIcon />
+                    <span className="text-sm">{post.post_comments.length} comments</span>
                 </div>
               </div>
+              {
+                post.showComments && (
+                  <div className="mt-5 border-t-[1px] border-gray-400 py-4">
+                      <div className="flex items-center gap-5">
+                          <input type="text"
+                              className="bg-gray-100 dark:bg-[#333333] rounded-2xl p-4 w-full"
+                              placeholder="Add your comment"
+                              ref={commentRef}
+                              />
+                          <SendIcon 
+                              onClick={}
+                              className="text-4xl hover:text-orange-700"
+                          />
+                      </div>
+                  </div>
+                )
+              }
             </div>
           </div>
     ))}
@@ -122,4 +154,4 @@ const Posts = () => {
   )
 }
 
-export default Posts
+export const MemoizedPosts = React.memo(Posts)

@@ -11,6 +11,9 @@ export const postSlice = createSlice({
     reducers: {
         setPosts: (state, action: PayloadAction<PostState[]>) => {
             state = action.payload
+            for(const post of state) {
+                post.showComments = false
+            }
             return state
         },
         addPost: (state, action: PayloadAction<PostState>) => {
@@ -22,11 +25,23 @@ export const postSlice = createSlice({
                 post.likes_count += 1
                 post.liked = true
             }
+        },
+        showComment: (state, action: PayloadAction<number>) => {
+            const post = state.find(post => post.id === action.payload)
+            if (post) {
+                post.showComments = !post.showComments
+            }
+        },
+        setComment: (state, action: PayloadAction<{id:number, comments:string}>) => {
+            const post = state.find(post => post.id === action.payload.id)
+            if (post) {
+                post.post_comments.push(action.payload.comments)
+            }
         }
     }
 })
 
-export const { setPosts, addPost, likeAction } = postSlice.actions
+export const { setPosts, addPost, likeAction, showComment, setComment } = postSlice.actions
 export const selectPosts = (state: { post: PostState[] }) => state.post
 
 export default postSlice.reducer

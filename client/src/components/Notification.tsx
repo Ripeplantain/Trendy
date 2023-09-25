@@ -3,6 +3,8 @@ import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { CloseIcon } from "../utils/constants"
 
+import React from "react"
+
 
 const Notification = () => {
 
@@ -39,4 +41,4 @@ const Notification = () => {
   )
 }
 
-export default Notification
+export const MemoizedNotification = React.memo(Notification)
