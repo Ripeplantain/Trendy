@@ -17,7 +17,7 @@ class Comment(BaseMixin):
         db_table = 'comment'
         verbose_name = _('comment')
         verbose_name_plural = _('comments')
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
 
 class Post(BaseMixin):
