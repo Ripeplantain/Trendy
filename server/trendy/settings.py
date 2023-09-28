@@ -2,6 +2,7 @@
 from pathlib import Path
 
 import os
+import dj_database_url
 from datetime import timedelta
 
 from dotenv import load_dotenv
@@ -94,6 +95,9 @@ DATABASES = {
     }
 }
 
+DATABASES['default'] = dj_database_url.parse("postgres://trendy_backend_user:jFcvOsJ0gb71elwZ2Z7GlUZAVJNcSBfh@dpg-ckau8cmsmu8c738ufksg-a.oregon-postgres.render.com/trendy_backend")
+
+# postgres://trendy_backend_user:jFcvOsJ0gb71elwZ2Z7GlUZAVJNcSBfh@dpg-ckau8cmsmu8c738ufksg-a.oregon-postgres.render.com/trendy_backend
 
 
 # Password validation
