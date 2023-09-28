@@ -8,6 +8,8 @@ from apps.user.serializers import CustomUserSerializer
 
 class CommentSerializer(serializers.ModelSerializer):
 
+    user = CustomUserSerializer(read_only=True)
+
     class Meta:
         model = Comment
         fields = '__all__'
