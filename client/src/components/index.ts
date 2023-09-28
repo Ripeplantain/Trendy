@@ -11,6 +11,7 @@ import {MemoizedAd as Ad} from "./Ad";
 import { MemoizedPostModal as PostModal} from "./PostModal";
 import {MemoizedTop as Top} from "./Top";
 import { MemoizedNotification as Notification} from "./Notification";
+import  MermoisedCommentSection from "./CommentSection";
 
 
 export {
@@ -26,5 +27,6 @@ export {
     Ad,
     PostModal,
     Top,
-    Notification
+    Notification,
+    MermoisedCommentSection as CommentSection
 }

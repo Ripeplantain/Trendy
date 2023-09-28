@@ -7,7 +7,7 @@ import useFetchPosts from "../custom/useFetchPosts"
 import { DJANGO_BASE_URL } from "../utils/constants"
 import useLikePost from "../custom/useLikePost"
 import { PostState } from "../utils/types/stateTypes"
-import { Top } from "../components"
+import { Top, CommentSection } from "../components"
 import useAddFriend from "../custom/useAddFriend"
 import { UserState } from "../utils/types/stateTypes"
 import useComment from "../custom/useComment"
@@ -22,6 +22,7 @@ const Posts = () => {
   const { setAddFriend } = useAddFriend()
   const user = useSelector(selectUser)
   const commentRef = useRef<HTMLInputElement>(null)
+  const { sendComment } = useComment()
 
   const handleLikeButton = async (post: PostState) => {
     try {
@@ -31,13 +32,15 @@ const Posts = () => {
     }
   }
 
-  const handleCommentButton = async (post: PostState) => {
+  const handleComment = async (post: PostState) => {
     try {
-      await useComment(post.id, commentRef.current?.value)
+      await sendComment(post.id, commentRef.current?.value)
+      commentRef.current!.value = ''
     } catch(error) {
       console.log(error)
     }
   }
+
 
 
   useFetchPosts()
@@ -139,10 +142,11 @@ const Posts = () => {
                               ref={commentRef}
                               />
                           <SendIcon 
-                              onClick={}
+                              onClick={() => handleComment(post)}
                               className="text-4xl hover:text-orange-700"
                           />
                       </div>
+                      <CommentSection post={post} />
                   </div>
                 )
               }

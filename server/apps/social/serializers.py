@@ -20,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
     likes = CustomUserSerializer(read_only=True, many=True)
     likes_count = serializers.SerializerMethodField()
     user = CustomUserSerializer(read_only=True)
-    post_comments = serializers.StringRelatedField(many=True, read_only=True)
+    post_comments = CommentSerializer(read_only=True, many=True)
 
 
     class Meta:

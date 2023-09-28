@@ -1,29 +1,30 @@
 import { postComment } from "../services/comment";
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { setComment } from "../state/features/postSlice";
+import { setNotifications } from '../state/features/userSlice';
 
 
 
-function useComment(id: number, comment: string | undefined) {
+
+function useComment() {
 
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        const sendComment = async () => {
-            try {
-                const response = await postComment(id, comment)
-                dispatch(setComment({
-                    id: id,
-                    comments: response.data
-                }))
-            } catch (error) {
-                console.log(error)
-            }
+    const sendComment = useCallback(async (id: number, comment: string | undefined) => {
+        try {
+            const response = await postComment(id, comment)
+            dispatch(setComment({
+                id: id,
+                comments: response.data
+            }))
+            dispatch(setNotifications(['Comment added successfully']))
+        } catch (error) {
+            console.log(error)
         }
-        sendComment()
-    },[dispatch, id, comment])
+    }, [dispatch])
 
+    return { sendComment }
 }
 
 

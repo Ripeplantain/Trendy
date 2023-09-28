@@ -42,9 +42,16 @@ interface PostState {
     likes: UserState[]
     likes_count: number
     file: FileState | null
-    post_comments: []
+    post_comments: CommentState[]
     liked: boolean
     showComments: boolean
+}
+
+interface CommentState {
+    id: number
+    user: UserState
+    comment: string
+    post: PostState
 }
 
 
