@@ -41,8 +41,6 @@ const Posts = () => {
     }
   }
 
-
-
   useFetchPosts()
 
   return (

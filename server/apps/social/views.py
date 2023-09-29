@@ -33,7 +33,7 @@ class PostViewSet(viewsets.ModelViewSet):
         """
         List all posts
         """
-        posts = Post.objects.filter(created_at__date=timezone.now().date()).order_by('-created_at')
+        posts = Post.objects.all().order_by('-created_at')
         serializer = PostSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
@@ -65,10 +65,6 @@ class PostViewSet(viewsets.ModelViewSet):
         """
         post = self.get_object()
 
-        if post.user == request.user:
-            return Response({
-                'detail': 'You cannot like your own post'
-            },status=status.HTTP_400_BAD_REQUEST)
         
         if request.user in post.likes.all():
             return Response({
