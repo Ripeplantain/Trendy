@@ -12,6 +12,7 @@ import useAddFriend from "../custom/useAddFriend"
 import { UserState } from "../utils/types/stateTypes"
 import useComment from "../custom/useComment"
 import React, { useRef } from "react"
+import { ColorRing } from "react-loader-spinner"
 
 const Posts = () => {
 
@@ -48,7 +49,15 @@ const Posts = () => {
 
       {posts.length === 0 && (
         <div className="text-center mt-[5rem]">
-            <span className="text-[40px] text-gray-400 font-medium mt-10">No posts yet</span>
+            <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+              />
         </div>
       )}
 

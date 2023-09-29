@@ -1,6 +1,6 @@
 import {
     DarkMode, LightMode,
-    MessageIcon, NotificationIcon, FaqIcon,
+    AnalyticsIcon, NotificationIcon, FaqIcon,
     LightNav, DarkNav, CloseIcon
 } from '../utils/constants'
 import { logoutUser } from '../services/auth'
@@ -72,8 +72,10 @@ const Navbar = () => {
                                         : <DarkMode
                                             className="dark:text-white hover:scale-150" />}
                         </li>
-                        <li>
-                            <MessageIcon className="dark:text-white hover:scale-150" />
+                        <li
+                            onClick={() => navigate('/analytics')}
+                        >
+                            <AnalyticsIcon className="dark:text-white hover:scale-150" />
                         </li>
                         <li
                             onClick={() => setShowNotifications(!showNotifications)}
@@ -115,8 +117,10 @@ const Navbar = () => {
                                             : <DarkMode
                                                 className="dark:text-white hover:text-4xl" />}
                                  </li>
-                                 <li>
-                                     <MessageIcon className="dark:text-white hover:text-4xl" />
+                                 <li
+                                    onClick={() => navigate('/analytics')}
+                                 >
+                                     <AnalyticsIcon className="dark:text-white hover:text-4xl" />
                                  </li>
                                  <li
                                     onClick={() => setShowNotifications(!showNotifications)}

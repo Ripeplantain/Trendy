@@ -9,7 +9,7 @@ import { selectDarkMode, selectNotifications, setNotifications } from './state/f
 import PrivateRoute from './utils/PrivateRoute'
 
 import { 
-        HomePage, LoginPage
+        HomePage, LoginPage, AnalyticsPage
      } from './pages'
 
 
@@ -45,6 +45,7 @@ const App = () => {
             <Route path="/" element={<LoginPage />} />
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<HomePage />} />
+              <Route path="/analytics" element={<AnalyticsPage />} />
             </Route>
         </Routes>
       </BrowserRouter>

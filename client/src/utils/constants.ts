@@ -17,6 +17,7 @@ import { BiSolidEditAlt as EditIcon } from 'react-icons/bi'
 import { MdPersonAddAlt1 as AddIcon } from 'react-icons/md'
 import { BsFillFileEarmarkImageFill as UploadImageIcon } from 'react-icons/bs'
 import { AiFillLike as LikeIcon } from 'react-icons/ai'
+import { SiGoogleanalytics as AnalyticsIcon } from 'react-icons/si'
 
 
 const DJANGO_BASE_URL = 'https://trendy-86ek.onrender.com'
@@ -44,5 +45,6 @@ export {
     LikeIcon,
     DJANGO_BASE_URL,
     FriendIcon,
-    SendIcon
+    SendIcon,
+    AnalyticsIcon
 }
