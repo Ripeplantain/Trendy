@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import { PostState } from '../../utils/types/stateTypes'
+import { PostState, CommentState } from '../../utils/types/stateTypes'
 
 const initialState: PostState[] = []
 
@@ -32,7 +32,10 @@ export const postSlice = createSlice({
                 post.showComments = !post.showComments
             }
         },
-        setComment: (state, action: PayloadAction<{id:number, comments:string}>) => {
+        setComment: (state, action: PayloadAction<{
+            id: number,
+            comments: CommentState
+        }>) => {
             const post = state.find(post => post.id === action.payload.id)
             if (post) {
                 post.post_comments.push(action.payload.comments)

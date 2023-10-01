@@ -20,7 +20,7 @@ import { AiFillLike as LikeIcon } from 'react-icons/ai'
 import { SiGoogleanalytics as AnalyticsIcon } from 'react-icons/si'
 
 
-const DJANGO_BASE_URL = 'https://trendy-86ek.onrender.com'
+const DJANGO_BASE_URL = 'http://127.0.0.1:8000'
 
 
 export {

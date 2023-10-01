@@ -1,3 +1,4 @@
+
 interface UserState {
     id: number
     first_name: string | null
@@ -65,13 +66,29 @@ interface NotificatonState {
     updated_at: string
 }
 
+interface MessageState {
+    id: number
+    sender: UserState
+    receiver: UserState
+    content: string
+    created_at: string
+    updated_at: string
+}
 
+
+interface ChatState {
+    receiver: UserState | null
+    messages: string[]
+}
 
 export type {
     UserState,
     AuthState,
     InitialState,
     PostState,
-    NotificatonState
+    NotificatonState,
+    CommentState,
+    MessageState,
+    ChatState,
 }
 

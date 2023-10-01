@@ -9,7 +9,8 @@ import { selectDarkMode, selectNotifications, setNotifications } from './state/f
 import PrivateRoute from './utils/PrivateRoute'
 
 import { 
-        HomePage, LoginPage, AnalyticsPage
+        ChatPage,
+        HomePage, LoginPage
      } from './pages'
 
 
@@ -17,6 +18,7 @@ const App = () => {
 
   const darkMode = useSelector(selectDarkMode)
   const notifications = useSelector(selectNotifications)
+  const token = localStorage.getItem('auth')
 
   useEffect(() => {
     if(notifications.length > 0) {
@@ -42,10 +44,11 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={token ? <HomePage /> : <LoginPage /> } />
+            {/* <Route path="/" element={<LoginPage />} /> */}
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<HomePage />} />
-              <Route path="/analytics" element={<AnalyticsPage />} />
+              <Route path="chat/:id" element={<ChatPage />}/>
             </Route>
         </Routes>
       </BrowserRouter>

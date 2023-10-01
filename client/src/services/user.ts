@@ -7,6 +7,10 @@ export const getUser = async () => {
     return response.data;
 }
 
+export const retrieveUser = async (id: string | undefined) => {
+    return await privateCall.get(`user/auth/${id}/`);
+}
+
 export const getFriends = async () => {
     return await privateCall.get('user/auth/new_friends/');
 }

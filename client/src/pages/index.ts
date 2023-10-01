@@ -1,9 +1,9 @@
 import HomePage from './HomePage';
 import LoginPage from './Auth/LoginPage';
-import AnalyticsPage from './AnalyticsPage';
+import ChatPage from './ChatPage'
 
 export { 
     HomePage,
     LoginPage,
-    AnalyticsPage
+    ChatPage
 } 

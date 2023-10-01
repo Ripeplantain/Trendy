@@ -1,10 +1,10 @@
 import {
     DarkMode, LightMode,
-    AnalyticsIcon, NotificationIcon, FaqIcon,
+    MessageIcon, NotificationIcon, FaqIcon,
     LightNav, DarkNav, CloseIcon
 } from '../utils/constants'
 import { logoutUser } from '../services/auth'
-import { Notification } from '.'
+import { Notification, FriendsModal } from '.'
 
 
 import React, { useState } from 'react'
@@ -16,6 +16,7 @@ const Navbar = () => {
 
     const [ showMenu, setShowMenu ] = useState(false)
     const [ showNotifications, setShowNotifications ] = useState(false)
+    const [ showMessages, setShowMessages ] = useState(false)
     const dispatch = useDispatch()
     const darkMode = useSelector(selectDarkMode)
     const navigate = useNavigate()
@@ -73,9 +74,9 @@ const Navbar = () => {
                                             className="dark:text-white hover:scale-150" />}
                         </li>
                         <li
-                            onClick={() => navigate('/analytics')}
+                            onClick={()=> setShowMessages(!showMessages)}
                         >
-                            <AnalyticsIcon className="dark:text-white hover:scale-150" />
+                            <MessageIcon className="dark:text-white hover:scale-150" />
                         </li>
                         <li
                             onClick={() => setShowNotifications(!showNotifications)}
@@ -118,9 +119,9 @@ const Navbar = () => {
                                                 className="dark:text-white hover:text-4xl" />}
                                  </li>
                                  <li
-                                    onClick={() => navigate('/analytics')}
-                                 >
-                                     <AnalyticsIcon className="dark:text-white hover:text-4xl" />
+                                    onClick={()=> setShowMessages(!showMessages)}
+                            >
+                                     <MessageIcon className="dark:text-white hover:text-4xl" />
                                  </li>
                                  <li
                                     onClick={() => setShowNotifications(!showNotifications)}
@@ -152,6 +153,13 @@ const Navbar = () => {
             {showNotifications && (
                 <div>
                     <Notification />
+                </div>
+            )}
+
+            {/* messages */}
+            {showMessages && (
+                <div>
+                    <FriendsModal />
                 </div>
             )}
 

@@ -25,6 +25,8 @@ const Posts = () => {
   const commentRef = useRef<HTMLInputElement>(null)
   const { sendComment } = useComment()
 
+  console.log(posts)
+
   const handleLikeButton = async (post: PostState) => {
     try {
       await setLike(post.id)

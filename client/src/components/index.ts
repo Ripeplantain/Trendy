@@ -12,6 +12,7 @@ import { MemoizedPostModal as PostModal} from "./PostModal";
 import {MemoizedTop as Top} from "./Top";
 import { MemoizedNotification as Notification} from "./Notification";
 import  MermoisedCommentSection from "./CommentSection";
+import MermoizedFriendsModal from "./FriendsModal";
 
 
 export {
@@ -28,5 +29,6 @@ export {
     PostModal,
     Top,
     Notification,
-    MermoisedCommentSection as CommentSection
+    MermoisedCommentSection as CommentSection,
+    MermoizedFriendsModal as FriendsModal
 }
