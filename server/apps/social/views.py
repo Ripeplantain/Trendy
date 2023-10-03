@@ -3,8 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
-from django.utils import timezone
-
+from django.views.decorators.cache import cache_page
 
 from .serializers import CommentSerializer, PostSerializer
 from .models import Comment, Post
@@ -29,6 +28,7 @@ class PostViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
+    @cache_page(60 * 5)
     def list(self, request):
         """
         List all posts
