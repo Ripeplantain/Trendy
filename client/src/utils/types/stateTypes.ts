@@ -59,6 +59,7 @@ interface CommentState {
 interface NotificatonState {
     id: number
     user: UserState
+    post: PostState
     content: string
     is_read: boolean
     type: string

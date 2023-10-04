@@ -10,6 +10,7 @@ const Notification = () => {
 
   dayjs.extend(relativeTime)
   const { notifications, markNotificationAsRead } = useNotification()
+  console.log(notifications)
 
   return (
     <div

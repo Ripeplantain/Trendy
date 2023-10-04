@@ -9,7 +9,7 @@ import { selectDarkMode, selectNotifications, setNotifications } from './state/f
 import PrivateRoute from './utils/PrivateRoute'
 
 import { 
-        ChatPage,
+        ChatPage, PostDetails,
         HomePage, LoginPage
      } from './pages'
 
@@ -49,6 +49,7 @@ const App = () => {
             <Route element={<PrivateRoute />}>
               <Route path="/home" element={<HomePage />} />
               <Route path="chat/:id" element={<ChatPage />}/>
+              <Route path="post/:id" element={<PostDetails />}/>
             </Route>
         </Routes>
       </BrowserRouter>

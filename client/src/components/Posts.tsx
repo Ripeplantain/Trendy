@@ -25,7 +25,6 @@ const Posts = () => {
   const commentRef = useRef<HTMLInputElement>(null)
   const { sendComment } = useComment()
 
-  console.log(posts)
 
   const handleLikeButton = async (post: PostState) => {
     try {
@@ -69,7 +68,7 @@ const Posts = () => {
             <div key={index + 1} className="bg-white dark:bg-gray-900 mt-10 px-10 py-8 h-fit rounded-2xl dark:text-white">
             <div className="flex justify-between items-center">
               <div className="flex gap-5">
-                  <img src={post.user.profile_picture ? base_url + post.user.profile_picture.file : DefaultImage} 
+                  <img src={post?.user.profile_picture ? base_url + post?.user.profile_picture.file : DefaultImage} 
                         alt="default image" 
                         className="w-[60px] rounded-full" />
                   <div className="flex flex-col justify-center">
