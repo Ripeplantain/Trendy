@@ -44,4 +44,6 @@ class NotificationViewSet(viewsets.ModelViewSet):
         notification = Notification.objects.get(id=pk)
         notification.read = True
         notification.save()
-        return Response(status=status.HTTP_200_OK)
+        return Response({
+            'post': notification.post.id,
+        },status=status.HTTP_200_OK)

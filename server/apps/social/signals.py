@@ -13,7 +13,8 @@ def post_commented_on(sender, instance, created, **kargs):
         Notification.objects.create(
             owner=instance.user,
             content=f'{instance.user.first_name} commented on our post',
-            type=NotificationType.IMPRESSION.value
+            type=NotificationType.IMPRESSION.value,
+            post=instance.post
         )
         Impressions.objects.create(
             user=instance.user,
@@ -28,7 +29,8 @@ def post_liked(sender, instance, action, **kwargs):
         Notification.objects.create(
             owner=instance.user,
             content=f'{instance.user.first_name} liked your post',
-            type=NotificationType.IMPRESSION.value
+            type=NotificationType.IMPRESSION.value,
+            post=instance
         )
         Impressions.objects.create(
             user=instance.user,
@@ -39,7 +41,8 @@ def post_liked(sender, instance, action, **kwargs):
         Notification.objects.create(
             owner=instance.user,
             content=f'{instance.user.first_name} unliked our post',
-            type=NotificationType.IMPRESSION.value
+            type=NotificationType.IMPRESSION.value,
+            post=instance
         )
         Impressions.objects.create(
             user=instance.user,
