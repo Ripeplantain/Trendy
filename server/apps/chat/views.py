@@ -4,7 +4,7 @@ from .serializers import ChatRoomSerializer, ChatSerializer
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
-# from apps.user.models import CustomUser
+from apps.user.models import CustomUser
 import random
 import string
 
@@ -48,7 +48,7 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
         """
 
         chat_room = request.query_params.get('chat_room')
-        messages = Chat.objects.filter(chat_room=chat_room).order_by('-created_at')
+        messages = Chat.objects.filter(chat_room=chat_room)
         serializer = ChatSerializer(messages, many=True)
         return Response(serializer.data)
     
@@ -59,10 +59,12 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
         """ 
 
         chat_room = ChatRoom.objects.get(id=request.data['chat_room'])
+        sender = CustomUser.objects.get(id=request.data['sender'])
         serializer = ChatSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save(
-            chat_room=chat_room
+            chat_room=chat_room,
+            sender=sender
         )
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 

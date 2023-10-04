@@ -26,8 +26,8 @@ const useWebsocket = (room:string) => {
                 data = JSON.parse(e.data);
                 dispatch(
                     addMessages({
-                        content: data.message,
-                        user: data.name,
+                        message: data.message,
+                        sender: data.name,
                     }),
                 )
             }

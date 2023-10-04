@@ -8,17 +8,19 @@ import useFetchUser from '../custom/useFetchUser';
 import useChatRoom from '../custom/useChatRoom';
 import useWebsocket from '../custom/useWebsocket';
 import useSendMessage from '../custom/useSendMessage';
+import useFetchMessages from '../custom/useFetchMessages';
 
 const ChatPage: React.FC = () => {
   const { receiver } = useChatUser();
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  const messages = useSelector(selectMessages);
   const { user } = useFetchUser();
   useChatRoom(receiver?.id , user?.id );
   const room = useSelector(selectRoom);
   const room_id = useSelector(selectRoomId);
+  useFetchMessages(room_id);
   const { sendMessage } = useWebsocket(room);
   const { sendMessageToServer } = useSendMessage();
+  const messages = useSelector(selectMessages);
 
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,6 +28,7 @@ const ChatPage: React.FC = () => {
     const message = messageRef.current?.value;
     const name: string = user?.email || ''
     sendMessage(message || '', name);
+    console.log(user?.id)
     sendMessageToServer(room_id, message || '', user?.id)
     messageRef.current!.value = '';
   }
@@ -52,11 +55,11 @@ const ChatPage: React.FC = () => {
             {messages.slice().reverse().map((message, index) => (
                     <div
                         key={index}
-                        className={`${message.user === user?.email ? 'self-end bg-blue-500' : 'self-start bg-gray-200 dark:bg-gray-700'}
+                        className={`${message.sender === user?.email ? 'self-end bg-blue-500' : 'self-start bg-gray-200 dark:bg-gray-700'}
                                     flex flex-col rounded-xl w-fit m-5 p-4`}
                     >   
                         <div>
-                            <p>{message.content}</p>
+                            <p>{message.message}</p>
                         </div>
                     </div>
                 ))}

@@ -6,7 +6,7 @@ export const getRoom = async (sender: number | undefined, receiver: number | und
 }
 
 export const getMessages = async (chatRoomId: number | undefined) => {
-    return await privateCall.get(`chat/chat-rooms/fetch_messages/?chat_room_id=${chatRoomId}`);
+    return await privateCall.get(`chat/chat-rooms/fetch_messages/?chat_room=${chatRoomId}`);
 }
 
 export const postMessage = async (chatRoomId: number | undefined, message: string, sender: number | undefined) => {

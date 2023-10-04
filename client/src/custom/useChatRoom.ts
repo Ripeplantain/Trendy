@@ -10,7 +10,6 @@ const useChatRoom = (sender: number | undefined, receiver: number | undefined) =
     useEffect(() => {
         const getChatRoom = async () => {
             const res = await getRoom(sender, receiver);
-            console.log(res.data);
             dispatch(setRoom(res.data[0].name));
             dispatch(setRoomId(res.data[0].id));
 

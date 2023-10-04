@@ -67,8 +67,8 @@ interface NotificatonState {
 }
 
 interface MessageState {
-    content: string
-    user: string
+    message: string
+    sender: string
 }
 
 
