@@ -84,7 +84,6 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                 multiple: false,
                 accept: {
                     image: ['image/jpeg', 'image/png', 'image/jpg'],
-                    video: ['video/mp4'],
                 },
                 maxSize: 50 * 1024 * 1024,
             })
@@ -117,7 +116,7 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                             className="my-7 border border-dashed bg-gray-300 bg-opacity-20 border-gray-900 dark:border-gray-600 rounded-lg py-11 px-6 text-center cursor-pointer">
                             <label htmlFor="post-image"
                                 className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono mb-3">
-                                Upload Image / Video
+                                Upload Image
                             </label>
                             <input {...getInputProps()} className="hidden" id="post-image" />
                             {isDragActive ? (

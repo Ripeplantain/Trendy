@@ -52,6 +52,9 @@ privateCall.interceptors.response.use(
                 token = newAccessToken
                 localStorage.setItem('auth', JSON.stringify(token))
                 return privateCall(originalRequest)
+            } else {
+                localStorage.removeItem('auth')
+                window.location.href = '/'
             }
         }
 

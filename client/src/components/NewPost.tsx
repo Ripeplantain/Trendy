@@ -64,7 +64,7 @@ const NewPost = () => {
                 onClick={() => setShowPostModal(true)}
                 className='mb-2 md:mb-0 flex gap-3 hover:text-orange-600 cursor-pointer'>
                 <UploadImageIcon className='text-2xl' />
-                <span>Image / Video</span>
+                <span>Image</span>
             </div>
             <div className='flex gap-3'>
                 <button 
