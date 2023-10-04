@@ -75,6 +75,8 @@ interface MessageState {
 interface ChatState {
     receiver: UserState | null
     messages: MessageState[]
+    chat_room: string
+    chat_room_id: number | undefined
 }
 
 export type {

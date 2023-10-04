@@ -28,7 +28,6 @@ class PostViewSet(viewsets.ModelViewSet):
         return [permission() for permission in permission_classes]
 
 
-    @cache_page(60 * 5)
     def list(self, request):
         """
         List all posts

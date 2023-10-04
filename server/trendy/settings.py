@@ -93,13 +93,17 @@ ASGI_APPLICATION = 'trendy.asgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Change the database engine to SQLite
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),  # Path to SQLite database file
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'monty_gram',  # Replace with your database name
+        'USER': 'postgres',  # Replace with your database username
+        'PASSWORD': 'password',  # Replace with your database password
+        'HOST': 'localhost',  # Replace with your database host if not local
+        'PORT': 5432,  # Replace with your database port if not default
     }
 }
 
-database_url = os.environ.get("DATABASE_URL")
-DATABASES['default'] = dj_database_url.parse(database_url)
+# database_url = os.environ.get("DATABASE_URL")
+# DATABASES['default'] = dj_database_url.parse(database_url)
 
 # postgres://trendy_backend_user:jFcvOsJ0gb71elwZ2Z7GlUZAVJNcSBfh@dpg-ckau8cmsmu8c738ufksg-a.oregon-postgres.render.com/trendy_backend
 

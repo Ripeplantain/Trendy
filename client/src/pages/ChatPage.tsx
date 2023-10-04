@@ -1,65 +1,35 @@
 import { Navbar } from '../components';
-import { w3cwebsocket as W3CWebSocket } from 'websocket';
-import { useEffect, useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import useChatUser from '../custom/useChatUser';
-import { DefaultImage, DJANGO_BASE_URL } from '../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
-import { addMessages, selectMessages } from '../state/features/chatSlice';
+import { DefaultImage } from '../utils/constants';
+import { useSelector } from 'react-redux';
+import { selectMessages, selectRoom, selectRoomId } from '../state/features/chatSlice';
 import useFetchUser from '../custom/useFetchUser';
-
-interface SocketData {
-  type?: string;
-  message: string;
-  name: string;
-}
-
+import useChatRoom from '../custom/useChatRoom';
+import useWebsocket from '../custom/useWebsocket';
+import useSendMessage from '../custom/useSendMessage';
 
 const ChatPage: React.FC = () => {
   const { receiver } = useChatUser();
-  const baseUrl = DJANGO_BASE_URL;
   const messageRef = useRef<HTMLTextAreaElement>(null);
-  const dispatch = useDispatch();
   const messages = useSelector(selectMessages);
   const { user } = useFetchUser();
+  useChatRoom(receiver?.id , user?.id );
+  const room = useSelector(selectRoom);
+  const room_id = useSelector(selectRoomId);
+  const { sendMessage } = useWebsocket(room);
+  const { sendMessageToServer } = useSendMessage();
 
-
-  const client = useMemo(() => new W3CWebSocket('ws://127.0.0.1:8000/ws/chat/lobby/'), []);
-
-  useEffect(() => {
-    if (!client) return;
-
-    client.onopen = () => {
-      console.log('WebSocket Client Connected');
-    };
-
-    client.onmessage = (e) => {
-      let data: SocketData = { message: '', name: '' };
-
-      if (typeof e.data === 'string') {
-        data = JSON.parse(e.data);
-        console.log('data:', data)
-        dispatch(addMessages({
-            content: data.message,
-            user: data.name
-        }));
-      }
-
-    };
-
-  }, [client, dispatch, receiver, user]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const message = messageRef.current?.value;
     const name: string = user?.email || ''
-    if (message) {
-      client.send(JSON.stringify({ 
-        message,
-        name
-     }));
-      messageRef.current!.value = '';
-    }
-  };
+    sendMessage(message || '', name);
+    sendMessageToServer(room_id, message || '', user?.id)
+    messageRef.current!.value = '';
+  }
+
 
   return (
     <div>
@@ -70,7 +40,7 @@ const ChatPage: React.FC = () => {
             <div className='flex justify-center mt-[6rem] items-center gap-4 border-b border-gray-600 pb-5'>
                 <img
                     className='w-10 h-10 rounded-full'
-                    src={receiver?.profile_picture ? baseUrl + receiver?.profile_picture : DefaultImage} 
+                    src={receiver?.profile_picture ? receiver?.profile_picture.file : DefaultImage} 
                     alt="default image" />
                 <h2
                     className='text-xl font-bold tracking-wide'
