@@ -27,7 +27,7 @@ const FriendsModal = () => {
                     <div className="flex items-center justify-center w-full gap-4">
                         <img 
                             className='h-10 w-10 rounded-full object-cover'
-                            src={friend.profile_picture ? baseUrl + friend.profile_picture : DefaultImage} 
+                            src={friend.profile_picture ? baseUrl + friend.profile_picture.file : DefaultImage} 
                             alt="prifile picture" />
                         <div className="flex flex-col">
                             <p className="text-md text-gray-500 dark:text-gray-400">{friend.first_name} {friend.last_name}</p>

@@ -67,18 +67,16 @@ interface NotificatonState {
 }
 
 interface MessageState {
-    id: number
-    sender: UserState
-    receiver: UserState
-    content: string
-    created_at: string
-    updated_at: string
+    message: string
+    sender: string
 }
 
 
 interface ChatState {
     receiver: UserState | null
-    messages: string[]
+    messages: MessageState[]
+    chat_room: string
+    chat_room_id: number | undefined
 }
 
 export type {

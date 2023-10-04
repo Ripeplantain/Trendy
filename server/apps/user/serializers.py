@@ -16,6 +16,8 @@ class UserPostSerializer(serializers.ModelSerializer):
 
 class FriendSerializer(serializers.ModelSerializer):
 
+    profile_picture = FileUploadSerializer(many=False, read_only=True)
+
     class Meta:
         model = User
         fields = '__all__'
@@ -34,6 +36,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'id',
             'email',
             'first_name',
             'last_name',

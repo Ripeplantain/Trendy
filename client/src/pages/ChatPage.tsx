@@ -1,40 +1,37 @@
-import { Navbar } from '../components'
-import {  w3cwebsocket as W3CWebSocket } from 'websocket'
-import {  useEffect } from 'react'
-import useChatUser from '../custom/useChatUser'
-import { DefaultImage } from '../utils/constants'
-import { DJANGO_BASE_URL } from '../utils/constants'
-
-
-interface SocketData {
-    message: string
-}
+import { Navbar } from '../components';
+import { useRef } from 'react';
+import useChatUser from '../custom/useChatUser';
+import { DefaultImage } from '../utils/constants';
+import { useSelector } from 'react-redux';
+import { selectMessages, selectRoom, selectRoomId } from '../state/features/chatSlice';
+import useFetchUser from '../custom/useFetchUser';
+import useChatRoom from '../custom/useChatRoom';
+import useWebsocket from '../custom/useWebsocket';
+import useSendMessage from '../custom/useSendMessage';
+import useFetchMessages from '../custom/useFetchMessages';
 
 const ChatPage: React.FC = () => {
+  const { receiver } = useChatUser();
+  const messageRef = useRef<HTMLTextAreaElement>(null);
+  const { user } = useFetchUser();
+  useChatRoom(receiver?.id , user?.id );
+  const room = useSelector(selectRoom);
+  const room_id = useSelector(selectRoomId);
+  useFetchMessages(room_id);
+  const { sendMessage } = useWebsocket(room);
+  const { sendMessageToServer } = useSendMessage();
+  const messages = useSelector(selectMessages);
 
-    const { receiver, owner } = useChatUser()
-    const baseUrl = DJANGO_BASE_URL
-    console.log(receiver)
-    console.log(owner)
 
-    useEffect(()=>{
-
-        const client = new W3CWebSocket('ws://127.0.0.1:8000/ws/chat/lobby/')
-
-        client.onopen = () => {
-            console.log('WebSocket Client Connected')
-        }
-
-        client.onmessage = (e) => {
-            let data: SocketData = { message: '' }
-
-            if (typeof e.data === 'string'){
-                data = JSON.parse(e.data)
-            }
-
-            console.log(data)
-        }
-    },[])
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const message = messageRef.current?.value;
+    const name: string = user?.email || ''
+    sendMessage(message || '', name);
+    console.log(user?.id)
+    sendMessageToServer(room_id, message || '', user?.id)
+    messageRef.current!.value = '';
+  }
 
 
   return (
@@ -43,17 +40,45 @@ const ChatPage: React.FC = () => {
         <div 
             className='dark:bg-gray-950 dark:text-white h-screen flex flex-col'
         >
-            <div className='flex w-screen justify-center mt-[7rem] items-center gap-4 border-b pb-9'>
+            <div className='flex justify-center mt-[6rem] items-center gap-4 border-b border-gray-600 pb-5'>
                 <img
-                    className='w-20 h-20 rounded-full'
-                    src={receiver?.profile_picture ? baseUrl + receiver?.profile_picture : DefaultImage} 
+                    className='w-10 h-10 rounded-full'
+                    src={receiver?.profile_picture ? receiver?.profile_picture.file : DefaultImage} 
                     alt="default image" />
                 <h2
-                    className='text-2xl font-bold tracking-wide'
+                    className='text-xl font-bold tracking-wide'
                 >{receiver?.first_name} {receiver?.last_name}</h2>
             </div>
-            <div></div>
-            <div></div>
+            <div
+                className='h-[70vh] overflow-y-scroll flex flex-col-reverse'
+            >
+            {messages.slice().reverse().map((message, index) => (
+                    <div
+                        key={index}
+                        className={`${message.sender === user?.email ? 'self-end bg-blue-500' : 'self-start bg-gray-200 dark:bg-gray-700'}
+                                    flex flex-col rounded-xl w-fit m-5 p-4`}
+                    >   
+                        <div>
+                            <p>{message.message}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            <div>
+                <form
+                    onSubmit={handleSubmit}
+                    className='flex flex-wrap w-screen items-center justify-center gap-2'>
+                    <textarea 
+                        ref={messageRef}
+                        className='w-full dark:bg-gray-900 text-black dark:text-white border border-gray-600 rounded-lg p-2'
+                        placeholder='Type your message here...'
+                    />
+                    <button
+                        type='submit'
+                        className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded-lg px-6 w-full'
+                    >Send</button>
+                </form>
+            </div>
         </div>
     </div>
   )
