@@ -40,5 +40,4 @@ txaio==21.2.1
 typing-extensions==3.10.0.2
 zope.interface==5.4.0
 whitenoise==6.5.0
-django-cloudinary-storage==0.3.0
-cloudinary==1.36.0
+
