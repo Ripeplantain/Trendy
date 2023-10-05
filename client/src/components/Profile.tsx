@@ -11,6 +11,7 @@ const Profile = () => {
 
     const { user } = useFetchUser()
     const baseUrl = DJANGO_BASE_URL
+    console.log(user)
 
 
 
