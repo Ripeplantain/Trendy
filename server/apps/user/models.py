@@ -17,7 +17,7 @@ class CustomUser(AbstractUser, BaseMixin):
     location = models.CharField(max_length=255, null=True, blank=True)
     phone_number = models.CharField(max_length=255, null=True, blank=True)
     occupation = models.CharField(max_length=255, null=True, blank=True)
-    profile_picture = models.ForeignKey(FileUpload, on_delete=models.SET_NULL, null=True, blank=True)
+    profile_picture = models.CharField(null=True, blank=True)
 
 
     USERNAME_FIELD = 'email'

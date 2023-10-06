@@ -24,7 +24,7 @@ class Post(BaseMixin):
 
     user = models.ForeignKey('user.CustomUser', related_name='user_posts' ,on_delete=models.CASCADE, null=True, blank=True)
     content = models.TextField(null=True, blank=True)
-    file = models.ForeignKey(File, on_delete=models.CASCADE, blank=True, null=True)
+    image = models.CharField(null=True, blank=True)
     likes = models.ManyToManyField('user.CustomUser', blank=True, related_name='likes')
 
 
