@@ -11,7 +11,7 @@ from django.utils import timezone
 
 
 class FileUpload(APIView):
-    
+
     def post(self, request):
 
         serializer = file_upload_serializer(data=request.data)

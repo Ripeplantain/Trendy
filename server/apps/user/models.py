@@ -20,6 +20,7 @@ class CustomUser(AbstractUser, BaseMixin):
     profile_picture = models.CharField(max_length=255, null=True, blank=True)
 
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 

@@ -30,7 +30,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
     post_counts = serializers.SerializerMethodField()
     user_impressions = serializers.StringRelatedField(many=True, read_only=True)
     impression_counts = serializers.SerializerMethodField()
-    profile_picture = FileUploadSerializer(many=False, read_only=True)
     friends = FriendSerializer(many=True, read_only=True)
 
     class Meta:
