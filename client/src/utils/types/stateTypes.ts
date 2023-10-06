@@ -5,7 +5,7 @@ interface UserState {
     last_name: string | null
     email: string 
     occupation: string | null
-    profile_picture: FileState | null
+    profile_picture: string | null
     location : string | null
     phone_number: string | null
     friends: UserState[] 
@@ -15,11 +15,11 @@ interface UserState {
     exp: number
 }
 
-interface FileState {
-    purpose: string
-    file: string
-    type: string
-}
+// interface FileState {
+//     purpose: string
+//     file: string
+//     type: string
+// }
 
 interface AuthState {
     access: string | null
@@ -31,7 +31,7 @@ interface InitialState {
     user: UserState | null
     auth: AuthState | null
     darkMode: boolean
-    image_id: number 
+    image_id: string 
     new_friends: UserState[]
     notifications: string[]
 }
@@ -42,7 +42,7 @@ interface PostState {
     content: string
     likes: UserState[]
     likes_count: number
-    file: FileState | null
+    file: string
     post_comments: CommentState[]
     liked: boolean
     showComments: boolean

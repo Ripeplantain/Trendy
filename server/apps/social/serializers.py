@@ -18,7 +18,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
 
-    file = FileUploadSerializer(read_only=True)
     likes = CustomUserSerializer(read_only=True, many=True)
     likes_count = serializers.SerializerMethodField()
     user = CustomUserSerializer(read_only=True)

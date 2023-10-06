@@ -44,18 +44,8 @@ class PostViewSet(viewsets.ModelViewSet):
         """
         serializer = PostSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-
-        file_id = request.data.get('file')
-        if not file_id:
-            post = serializer.save(user=request.user)
-            return Response(PostSerializer(post).data, status=status.HTTP_201_CREATED)
-        else:
-            file = File.objects.filter(id=request.data['file']).first()
-            if file and file.purpose == file_enum.POST.value:
-                post = serializer.save(user=request.user, file=file)
-                return Response(PostSerializer(post).data, status=status.HTTP_201_CREATED)
-            else:
-                return Response({'detail': 'Invalid file'}, status=status.HTTP_400_BAD_REQUEST)
+        post = serializer.save(user=request.user)
+        return Response(PostSerializer(post).data, status=status.HTTP_201_CREATED)
 
     @action(detail=True, methods=['post'])
     def like(self, request, pk=None):

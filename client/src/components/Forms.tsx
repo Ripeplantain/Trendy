@@ -46,7 +46,7 @@ const Forms = () => {
         } else {
             try {
                 registerUser(data as RegisterData)
-                dispatch(setImageId(0))
+                dispatch(setImageId(''))
                 dispatch(setNotifications(['Registration successful']))
                 setShowLogin(!showLogin)
             } catch(error) {

@@ -13,7 +13,6 @@ import {MemoizedTop as Top} from "./Top";
 import { MemoizedNotification as Notification} from "./Notification";
 import  MermoisedCommentSection from "./CommentSection";
 import MermoizedFriendsModal from "./FriendsModal";
-import UploadWidget from "./UploadWidget";
 
 
 export {
@@ -32,5 +31,4 @@ export {
     Notification,
     MermoisedCommentSection as CommentSection,
     MermoizedFriendsModal as FriendsModal,
-    UploadWidget
 }

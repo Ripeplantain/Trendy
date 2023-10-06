@@ -2,13 +2,11 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../state/features/userSlice'
 import { DefaultImage } from '../utils/constants'
-import { DJANGO_BASE_URL } from '../utils/constants'
 import { useNavigate } from 'react-router-dom'
 
 const FriendsModal = () => {
 
     const user = useSelector(selectUser)
-    const baseUrl = DJANGO_BASE_URL
     const navigate = useNavigate()
 
   return (
@@ -27,7 +25,7 @@ const FriendsModal = () => {
                     <div className="flex items-center justify-center w-full gap-4">
                         <img 
                             className='h-10 w-10 rounded-full object-cover'
-                            src={friend.profile_picture ? baseUrl + friend.profile_picture.file : DefaultImage} 
+                            src={friend.profile_picture ? friend.profile_picture : DefaultImage} 
                             alt="prifile picture" />
                         <div className="flex flex-col">
                             <p className="text-md text-gray-500 dark:text-gray-400">{friend.first_name} {friend.last_name}</p>

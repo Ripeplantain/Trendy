@@ -25,7 +25,7 @@ const Info = () => {
                 <div className='flex justify-between items-center'>
                   <div className='flex gap-5'>
                     <div>
-                      <img src={user.profile_picture ? user.profile_picture.file : DefaultImage} 
+                      <img src={user.profile_picture ? user.profile_picture : DefaultImage} 
                             alt="profile image" 
                             className='w-[70px] h-[70px] rounded-full' />
                     </div>

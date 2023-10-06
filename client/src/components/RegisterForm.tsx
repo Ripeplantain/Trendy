@@ -33,17 +33,19 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ register }) => {
 
         const data = new FormData()
         data.append('file', acceptedFiles[0])
-        data.append('purpose', 'PROFILE_PICTURE')
+        data.append('upload_preset', 'bp4hjemb')
 
         try {
-          setIsLoading(true)
-          const res = await uploadFile(data)
-          dispatch(setImageId(res.data.id))
+            setIsLoading(true)
+            const res = await uploadFile(data)
+            console.log(res.secure_url)
+            dispatch(setImageId(res.secure_url))
         } catch (error) {
-          console.error('Image upload error: ', error)
+            console.error('Image upload error: ', error)
         } finally {
-          setIsLoading(false)
+            setIsLoading(false)
         }
+
 
         setPreview(acceptedFiles[0].name)
 

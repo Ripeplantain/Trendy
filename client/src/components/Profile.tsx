@@ -1,7 +1,7 @@
 import { 
         DefaultImage, SettingsIcon, LocationIcon
         , WorkIcon, TwitterIcon, LinkedInIcon,
-        EditIcon, DJANGO_BASE_URL
+        EditIcon
      } from "../utils/constants"
 import useFetchUser from "../custom/useFetchUser"
 import React from "react"
@@ -10,16 +10,13 @@ import React from "react"
 const Profile = () => {
 
     const { user } = useFetchUser()
-    const baseUrl = DJANGO_BASE_URL
-
-
 
   return (
     <section className="bg-white dark:bg-gray-900 px-10 py-8 h-fit rounded-2xl dark:text-white">
         <div>
             <div className="flex gap-4 justify-between items-center">
                 <div className="flex flex-wrap items-center gap-7">
-                    <img src={user?.profile_picture ? baseUrl + user?.profile_picture.file : DefaultImage} 
+                    <img src={user?.profile_picture ? user?.profile_picture : DefaultImage} 
                             alt="default image" 
                             width={60} height={60} className="rounded-full" />
                     <div className="leading-4">

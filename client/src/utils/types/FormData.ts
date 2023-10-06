@@ -15,5 +15,5 @@ export type RegisterData = {
     phone_number: string;
     location: string;
     occupation: string;
-    profile_picture: number;
+    profile_picture: string;
 }

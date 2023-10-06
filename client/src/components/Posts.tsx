@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { selectPosts, showComment } from "../state/features/postSlice"
 import { selectUser } from "../state/features/userSlice"
 import useFetchPosts from "../custom/useFetchPosts"
-import { DJANGO_BASE_URL } from "../utils/constants"
 import useLikePost from "../custom/useLikePost"
 import { PostState } from "../utils/types/stateTypes"
 import { Top, CommentSection } from "../components"
@@ -17,8 +16,8 @@ import { ColorRing } from "react-loader-spinner"
 const Posts = () => {
 
   const posts = useSelector(selectPosts)
+  console.log(posts)
   const dispatch = useDispatch()
-  const base_url = DJANGO_BASE_URL
   const { setLike } = useLikePost()
   const { setAddFriend } = useAddFriend()
   const user = useSelector(selectUser)
@@ -68,7 +67,7 @@ const Posts = () => {
             <div key={index + 1} className="bg-white dark:bg-gray-900 mt-10 px-10 py-8 h-fit rounded-2xl dark:text-white">
             <div className="flex justify-between items-center">
               <div className="flex gap-5">
-                  <img src={post?.user.profile_picture ? base_url + post?.user.profile_picture.file : DefaultImage} 
+                  <img src={post?.user.profile_picture ? post?.user.profile_picture : DefaultImage} 
                         alt="default image" 
                         className="w-[60px] rounded-full" />
                   <div className="flex flex-col justify-center">
@@ -97,9 +96,14 @@ const Posts = () => {
               <p className="mt-5">{ post.content }</p>
             </div>
             <div>
-                {post.file ? post.file.type === 'image' ? (
+            <img
+                  src={post.file}
+                  alt="post image"
+                  className="w-full md:h-[600px] object-center rounded-xl mt-5"
+                  />
+                {/* {post.file ? post.file.type === 'image' ? (
                   <img
-                    src={base_url + post.file.file}
+                    src={post.file.file}
                     alt="post image"
                     className="w-full md:h-[600px] object-center rounded-xl mt-5"
                   />
@@ -107,10 +111,10 @@ const Posts = () => {
                     <video
                           className="w-full object-center rounded-xl mt-5"
                           controls>
-                      <source src={base_url + post.file.file} type="video/mp4"/>
+                      <source src={post.file.file} type="video/mp4"/>
                       Your browser does not support the video tag.
                     </video>
-                ) : null}
+                ) : null} */}
             </div>
             <div>
               <div className="flex items-center mt-5 gap-6 ps-7">

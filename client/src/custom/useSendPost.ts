@@ -11,6 +11,8 @@ function useSendPost() {
 
     const setPost = useCallback(async (data: FormData) => {
         try {
+            console.log('hello')
+            console.log(data)
             const response = await sendPost(data)
             setStatus(response.status)
             dispatch(addPost(response.data))
