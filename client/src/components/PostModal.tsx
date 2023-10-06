@@ -68,7 +68,9 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                             <input type="text" className="bg-gray-100 dark:bg-[#333333] rounded-2xl p-5 w-full"
                                 placeholder="What's on your mind" ref={postRef} />
                         </div>
-                        <div>
+                        <div
+                            className="flex justify-center items-center mt-5 pb-4"
+                        >
                             <UploadWidget />
                         </div>
                         <button
