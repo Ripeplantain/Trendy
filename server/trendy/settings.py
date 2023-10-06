@@ -99,9 +99,6 @@ DATABASES = {
     }
 }
 
-database_url = 'postgres://trendy_backend_user:jFcvOsJ0gb71elwZ2Z7GlUZAVJNcSBfh@dpg-ckau8cmsmu8c738ufksg-a/trendy_backend'
-DATABASES['default'] = dj_database_url.parse(database_url)
-
 # postgres://trendy_backend_user:jFcvOsJ0gb71elwZ2Z7GlUZAVJNcSBfh@dpg-ckau8cmsmu8c738ufksg-a.oregon-postgres.render.com/trendy_backend
 
 
