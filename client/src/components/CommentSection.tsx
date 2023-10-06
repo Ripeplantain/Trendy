@@ -1,7 +1,6 @@
 
 import React, {useState} from 'react'
 import { PostState } from '../utils/types/stateTypes'
-import { DJANGO_BASE_URL } from "../utils/constants"
 import { DefaultImage } from '../utils/constants'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../state/features/userSlice'
@@ -13,7 +12,6 @@ interface Prop {
 
 const CommentSection: React.FC<Prop> = ({post}) => {
 
-    const base_url = DJANGO_BASE_URL
     const user = useSelector(selectUser)
     const [ loadCount, setLoadCount ] = useState<number>(5)
 
@@ -31,7 +29,7 @@ const CommentSection: React.FC<Prop> = ({post}) => {
                 >
                 <img
                     className='w-[60px] h-[60px] rounded-full'
-                    src={comment.user.profile_picture ? base_url + comment.user.profile_picture.file : DefaultImage} alt="profile-image" />
+                    src={comment.user.profile_picture ? comment.user.profile_picture : DefaultImage} alt="profile-image" />
                 <div className='flex flex-col gap-2'>
                     <p className='text-sm font-semibold'>{comment.user.first_name} {comment.user.last_name}</p>
                     <p className='text-sm'>{comment.comment}</p>

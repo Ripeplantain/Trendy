@@ -43,7 +43,7 @@ const ChatPage: React.FC = () => {
             <div className='flex justify-center mt-[6rem] items-center gap-4 border-b border-gray-600 pb-5'>
                 <img
                     className='w-10 h-10 rounded-full'
-                    src={receiver?.profile_picture ? receiver?.profile_picture.file : DefaultImage} 
+                    src={receiver?.profile_picture ? receiver?.profile_picture : DefaultImage} 
                     alt="default image" />
                 <h2
                     className='text-xl font-bold tracking-wide'
