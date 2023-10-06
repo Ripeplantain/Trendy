@@ -1,14 +1,11 @@
-import { MouseEvent, useRef, useCallback, useState, ReactNode } from "react"
+import { MouseEvent, useRef } from "react"
 import { CloseIcon, DefaultImage, DJANGO_BASE_URL } from "../utils/constants"
 
 import { useSelector, useDispatch } from "react-redux"
 import { selectUser, selectImageId, setNotifications, setImageId } from "../state/features/userSlice"
-import { FileRejection, useDropzone } from "react-dropzone"
-import { TailSpin } from 'react-loader-spinner'
-import { uploadFile } from "../services/uploadFile"
 import useSendPost from '../custom/useSendPost'
 import React from "react"
-
+import { UploadWidget } from "."
 
 interface ModalProp {
 visible: boolean
@@ -21,40 +18,9 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
             const postRef = useRef<HTMLInputElement>(null)
             const user = useSelector(selectUser)
             const dispatch = useDispatch()
-            const [ preview, setPreview ] = useState< ReactNode | null>()
             const imageId = useSelector(selectImageId)
             const {status , setPost, setStatus} = useSendPost()
-            const [errorMessage, setErrorMessage] = useState<string | null>(null)
             const baseUrl = DJANGO_BASE_URL
-            const [isLoading, setIsLoading] = useState<boolean>(false)
-
-
-            const onDrop = useCallback(async (acceptedFiles: File[], fileRejections:FileRejection[]) => {
-
-                if (fileRejections.length > 0) {
-                    setErrorMessage(fileRejections[0].errors[0].message)
-                    return
-                }
-
-                const data = new FormData()
-                data.append('file', acceptedFiles[0])
-                data.append('purpose', 'POST')
-
-                try {
-                    setIsLoading(true)
-                    const res = await uploadFile(data)
-                    dispatch(setImageId(res.data.id))
-                    dispatch(setNotifications(['Image uploaded successfully']))
-                } catch (error) {
-                    dispatch(setNotifications(['Image upload error']))
-                    console.error('Image upload error: ', error)
-                } finally {
-                    setIsLoading(false)
-                }
-
-                setPreview(acceptedFiles[0].name)
-
-            }, [dispatch])
 
             const handlePostSubmit  = async (e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault()
@@ -78,15 +44,6 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                 onClose()
             }
 
-            const {getRootProps, getInputProps, isDragActive} = useDropzone({
-                onDrop,
-                maxFiles: 1,
-                multiple: false,
-                accept: {
-                    image: ['image/jpeg', 'image/png', 'image/jpg'],
-                },
-                maxSize: 50 * 1024 * 1024,
-            })
 
             const handleOnClose = (e: MouseEvent) => {
                 if (e.target instanceof HTMLDivElement && e.target.id === "container") {
@@ -111,53 +68,13 @@ const PostModal: React.FC<ModalProp> = ({visible, onClose}) => {
                             <input type="text" className="bg-gray-100 dark:bg-[#333333] rounded-2xl p-5 w-full"
                                 placeholder="What's on your mind" ref={postRef} />
                         </div>
-                        <div {...getRootProps()}
-                            onClick={e => e.stopPropagation()}
-                            className="my-7 border border-dashed bg-gray-300 bg-opacity-20 border-gray-900 dark:border-gray-600 rounded-lg py-11 px-6 text-center cursor-pointer">
-                            <label htmlFor="post-image"
-                                className="block text-2xl text-gray-700 dark:text-white tracking-wider font-mono mb-3">
-                                Upload Image
-                            </label>
-                            <input {...getInputProps()} className="hidden" id="post-image" />
-                            {isDragActive ? (
-                            <p className="text-blue-500">Drop the files here ...</p>
-                            ) : (
-                            <p className="text-gray-500">
-                                Drag and drop some files here, or click to select files
-                            </p>
-                            )}
-                            {errorMessage && (
-                                <p className="text-red-500 text-sm mt-3">{errorMessage}</p>
-                            )}
+                        <div>
+                            <UploadWidget />
                         </div>
-                        
-                        {isLoading && <TailSpin
-                                        height="80"
-                                        width="80"
-                                        color="#4fa94d"
-                                        ariaLabel="tail-spin-loading"
-                                        radius="1"
-                                        wrapperStyle={{}}
-                                        wrapperClass=""
-                                        visible={true}
-                                    /> }
-
-                        {
-                        preview && (
-                        <>
-                            <div className="mb-4 text-gray-00">
-                                <span>{preview}</span>
-                            </div>
-                            <div>
-                                <button
-                                    onClick={handlePostSubmit}
-                                    className="bg-blue-600 w-full py-6 text-white text-xl font-medium tracking-wider hover:bg-blue-500">Add
+                        <button
+                            onClick={handlePostSubmit}
+                            className="bg-blue-600 w-full py-6 text-white text-xl font-medium tracking-wider hover:bg-blue-500">Add
                                     to your post</button>
-                            </div>
-                        </>
-                        )
-                        }
-
                     </div>
                 </div>
                 )}

@@ -2,7 +2,7 @@
 from pathlib import Path
 
 import os
-# import dj_database_url
+import dj_database_url
 from datetime import timedelta
 
 from dotenv import load_dotenv
@@ -99,8 +99,8 @@ DATABASES = {
     }
 }
 
-# database_url = os.environ.get("DATABASE_URL")
-# DATABASES['default'] = dj_database_url.parse(database_url)
+database_url = 'postgres://trendy_backend_user:jFcvOsJ0gb71elwZ2Z7GlUZAVJNcSBfh@dpg-ckau8cmsmu8c738ufksg-a/trendy_backend'
+DATABASES['default'] = dj_database_url.parse(database_url)
 
 # postgres://trendy_backend_user:jFcvOsJ0gb71elwZ2Z7GlUZAVJNcSBfh@dpg-ckau8cmsmu8c738ufksg-a.oregon-postgres.render.com/trendy_backend
 
