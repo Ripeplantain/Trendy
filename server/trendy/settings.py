@@ -22,7 +22,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY", '**********')
 # DEBUG = os.environ.get("DEBUG", "False").lower() == "true"
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "127.0.0.1").split(" ")
+ALLOWED_HOSTS = ['.vercel.app', 'localhost',]
 
 
 # Application definition
