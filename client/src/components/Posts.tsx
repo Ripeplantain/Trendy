@@ -96,25 +96,13 @@ const Posts = () => {
               <p className="mt-5">{ post.content }</p>
             </div>
             <div>
-            <img
-                  src={post.file}
-                  alt="post image"
-                  className="w-full md:h-[600px] object-center rounded-xl mt-5"
-                  />
-                {/* {post.file ? post.file.type === 'image' ? (
+            {post.file && (
                   <img
-                    src={post.file.file}
+                    src={post.file}
                     alt="post image"
                     className="w-full md:h-[600px] object-center rounded-xl mt-5"
                   />
-                ) : (
-                    <video
-                          className="w-full object-center rounded-xl mt-5"
-                          controls>
-                      <source src={post.file.file} type="video/mp4"/>
-                      Your browser does not support the video tag.
-                    </video>
-                ) : null} */}
+            )}
             </div>
             <div>
               <div className="flex items-center mt-5 gap-6 ps-7">

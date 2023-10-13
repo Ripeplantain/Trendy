@@ -14,7 +14,7 @@ const Notification = () => {
 
   return (
     <div
-        className="fixed top-[38vh] md:top-16 md:right-2 w-full overflow-auto md:w-80 h-96 bg-white dark:bg-gray-900 rounded-lg shadow-lg"
+        className="fixed top-[38vh] md:top-16 md:right-2 w-full overflow-auto md:w-80 bg-white dark:bg-gray-900 rounded-lg shadow-lg"
     >
         <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 p-4">
             <h3 className="text-xl font-medium mx-auto dark:text-white">Notifications</h3>
