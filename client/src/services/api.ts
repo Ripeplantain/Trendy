@@ -7,8 +7,7 @@ interface Token {
 }
 
 
-// const baseURL = 'http://127.0.0.1:8000/api/v1/'
-const baseURL = 'https://monty-gram.onrender.com/api/v1/'
+const baseURL = 'http://127.0.0.1:8000/api/v1/'
 const tokenJson = localStorage.getItem('auth')
 
 let token: Token = tokenJson && JSON.parse(tokenJson)

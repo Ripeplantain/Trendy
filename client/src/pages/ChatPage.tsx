@@ -10,7 +10,8 @@ import useWebsocket from '../custom/useWebsocket';
 import useSendMessage from '../custom/useSendMessage';
 import useFetchMessages from '../custom/useFetchMessages';
 
-const ChatPage: React.FC = () => {
+const ChatPage: React.FC = () => { 
+    
   const { receiver } = useChatUser();
   const messageRef = useRef<HTMLTextAreaElement>(null);
   const { user } = useFetchUser();

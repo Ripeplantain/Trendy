@@ -10,9 +10,14 @@ export const getMessages = async (chatRoomId: number | undefined) => {
 }
 
 export const postMessage = async (chatRoomId: number | undefined, message: string, sender: number | undefined) => {
-    return await privateCall.post(`chat/chat-rooms/send_message/`, {
+
+    const data = {
         chat_room: chatRoomId,
         message: message,
         sender: sender
-    });
+    }
+
+    console.log(data)
+
+    return await privateCall.post(`chat/chat-rooms/send_message/`, data);
 }

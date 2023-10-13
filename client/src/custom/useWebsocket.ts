@@ -11,38 +11,37 @@ interface SocketData {
   }
 const useWebsocket = (room:string) => {
 
-    const client = useMemo(() => new W3CWebSocket(`ws://127.0.0.1:8000/ws/chat/${room}/`), [room]);
     const dispatch = useDispatch();
+    const client = useMemo(() => new W3CWebSocket(`ws://localhost:8000/ws/chat/${room}/`), [room]);
 
-    useEffect(()=> {
+    const sendMessage = useCallback((message: string, name: string) => {
+        if (client.readyState === client.OPEN) {
+            const msg = { message, name };
+            client.send(JSON.stringify(msg));
+        }
+    }, [client]);
+
+    useEffect(() => {
         client.onopen = () => {
             console.log('WebSocket Client Connected');
         };
-    
-        client.onmessage = (e) => {
-            let data: SocketData = {message: '', name: ''};
-    
-            if (typeof e.data === 'string') {
-                data = JSON.parse(e.data);
-                dispatch(
-                    addMessages({
-                        message: data.message,
-                        sender: data.name,
-                    }),
-                )
-            }
+        client.onmessage = (message) => {
+            const dataFromServer: SocketData = JSON.parse(message.data.toString());
+            console.log('got reply! ', dataFromServer);
+            dispatch(addMessages({
+                message: dataFromServer.message,
+                sender: dataFromServer.name,
+            }));
         };
-    },[client, dispatch])
+        client.onclose = () => {
+            console.log('echo-protocol Client Closed');
+        };
+        client.onerror = (error) => {
+            console.log('Connection Error: ', error);
+        };
+    }, [client, dispatch]);
 
-
-    const sendMessage = useCallback((message:string, name: string) => {
-        client.send(JSON.stringify({
-            message,
-            name,
-        }));
-    }, [client]);
-
-    return {sendMessage};
+    return { sendMessage };
 }
 
 export default useWebsocket;

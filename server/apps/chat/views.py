@@ -5,6 +5,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from apps.user.models import CustomUser
+from django.db.models import Q, Count
 import random
 import string
 
@@ -29,7 +30,8 @@ class ChatRoomViewSet(viewsets.ModelViewSet):
 
         chat_room = ChatRoom.objects.filter(
             members__in=[sender, receiver]
-        ).distinct()
+        ).annotate(members_count=Count('members')).filter(members_count=2)
+        print(chat_room)
 
         if chat_room.exists():
             serializer = ChatRoomSerializer(chat_room, many=True)
